@@ -1,0 +1,610 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0F68C5AAF9C0D0035B237EE0 /* ARSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0160C335F4709693296A10 /* ARSessionController.swift */; };
+		1186E6425A8440857F06FC43 /* LibrarySpacePanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E5BBF462F6A93E7FA579F /* LibrarySpacePanel.swift */; };
+		122A6786A7BBAEDC5E227DB5 /* DepthSampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9901ADE773B35949651F19A0 /* DepthSampler.swift */; };
+		1662E2EFC0E5089F24799E9A /* BookMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7DB05AAB3D391C6ACAB766 /* BookMatcher.swift */; };
+		17E0A638E2849B250074EA95 /* BookCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEEBC745884ECB86CAAC406 /* BookCatalog.swift */; };
+		1DF9FA0EB7364B2D03A84D3D /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B675937DA4E30DFA6D4D901 /* ScannerView.swift */; };
+		215F487D8BE31B18A17EAEEE /* ShelfGuidanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D4F5345EFB99CB6A7E194 /* ShelfGuidanceTests.swift */; };
+		22E4AEE8DFB2B47C3C111348 /* CatalogQueryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1208EF47EF7C47A02F2FA755 /* CatalogQueryTests.swift */; };
+		26A678AE6899F48F22A3340C /* CatalogBookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69A0781B7258B75F629BC91 /* CatalogBookDetailView.swift */; };
+		2D5AF535B66A9D9C4DFB82D3 /* ScanCandidateTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7A839D45D4D60BE59625A1 /* ScanCandidateTrackerTests.swift */; };
+		4CBA71077084CC52324D06A5 /* LibrarySpaceControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC46D57276231EFE5D2E0C6 /* LibrarySpaceControllerTests.swift */; };
+		5024A24F8FBD2F1F44A60FC4 /* ARSmartLibraryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EBB46DBC8009C90E5B8A53 /* ARSmartLibraryApp.swift */; };
+		52A2FE227AFF467FCE0677C4 /* CatalogQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EF51C531FFCF4AEE15BAB4 /* CatalogQuery.swift */; };
+		588AFB8294AD0105E732579D /* LibrarySpaceTaskCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A979B4002363063261DFB873 /* LibrarySpaceTaskCard.swift */; };
+		6056452DFE7C55F100A8E387 /* LibrarySpaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89540A698A7D78A1DD64EEA1 /* LibrarySpaceController.swift */; };
+		70D943AF8CCEB9817A391DA5 /* ScanCandidateTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C184A0CF6047AC9984720E8D /* ScanCandidateTracker.swift */; };
+		7251878C0BBE40DA7D601A40 /* ReadingListStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A7BDF448F0352A7D9617D9 /* ReadingListStoreTests.swift */; };
+		7C564155EBF2169CD1F3218B /* ShelfGuidance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42911B7271C6BCADFAC0325B /* ShelfGuidance.swift */; };
+		7DE6D4AE12DE989250CAA664 /* BookMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F1889AF4177F096F6983A8 /* BookMatcherTests.swift */; };
+		82779628B9668E322D0CDC91 /* ShelfPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB16BD2EA944D8D33B709E9 /* ShelfPlacement.swift */; };
+		847076B638367057CA881ECE /* ScanTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994CAC1581198AEC723B5650 /* ScanTarget.swift */; };
+		8829CAC529393BCD555F9AE6 /* LibrarySpaceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EC7890F614D0F865BE7C62 /* LibrarySpaceStore.swift */; };
+		8D3FF6C2E375EB06DE1859EE /* CatalogBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E88FEBAE98C1514EBF188C /* CatalogBrowserView.swift */; };
+		9C8A2A1952A14AD06A21300E /* LibrarySpaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06C9DFB0635D5FE661EC913 /* LibrarySpaceTests.swift */; };
+		A18C5CC949E522B7B0524142 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = D176B89B2F365916695891E7 /* Book.swift */; };
+		A43ED68D8D5C95B85ADCBE8A /* BookDetailCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF250E3110C182BABE8A170F /* BookDetailCard.swift */; };
+		A9410F70A105322694A7E107 /* RecommendationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59B5BD069A66B4282A9496B /* RecommendationEngine.swift */; };
+		AC5468C962658AD9F00A756B /* LibraryTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2744F0AA2723487DA318AF5 /* LibraryTheme.swift */; };
+		AC59344E86751E3355F219E1 /* RecommendationEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6877148BBC8CFFECC31A3F70 /* RecommendationEngineTests.swift */; };
+		B0909FCBEEDF99AD51EE3B9E /* ReadingListStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AEE8763796833017B64FFC /* ReadingListStore.swift */; };
+		BF7D9621AECD02AF2D560074 /* ARViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC472B8145D8BF60400048C /* ARViewContainer.swift */; };
+		C4E8877B3CCA9AEBA2B7663D /* BookCatalogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185440AB2EFF6BC77B4DE062 /* BookCatalogTests.swift */; };
+		D14ED4CD31B349FBADF8CB86 /* BookCatalog.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D95AC8A052606B61A7D4081 /* BookCatalog.json */; };
+		E61E1CE0EE8C0932E7599A17 /* ShelfPlacementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC58F5B210C7F575B3B660D5 /* ShelfPlacementTests.swift */; };
+		ED70EEEB6232288BEA37A8DA /* ARSessionControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30BF84F5AC6234251E14CF1 /* ARSessionControllerTests.swift */; };
+		FAFFC67DEB2486971C651D6A /* LibrarySpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBDBC05FB064D1C1FA51656 /* LibrarySpace.swift */; };
+		FB2E7BA4A9148DC627119C2B /* ScanTargetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF84B0DB8B5F77208D3747C /* ScanTargetTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		04F04D34DA44075FECFCD654 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D34D0067EDD20417B2E74D92 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 490B17A450590F7C4179981F;
+			remoteInfo = ARSmartLibrary;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1208EF47EF7C47A02F2FA755 /* CatalogQueryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogQueryTests.swift; sourceTree = "<group>"; };
+		185440AB2EFF6BC77B4DE062 /* BookCatalogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCatalogTests.swift; sourceTree = "<group>"; };
+		1D0160C335F4709693296A10 /* ARSessionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSessionController.swift; sourceTree = "<group>"; };
+		1DF84B0DB8B5F77208D3747C /* ScanTargetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanTargetTests.swift; sourceTree = "<group>"; };
+		1FB16BD2EA944D8D33B709E9 /* ShelfPlacement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfPlacement.swift; sourceTree = "<group>"; };
+		36AEE8763796833017B64FFC /* ReadingListStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListStore.swift; sourceTree = "<group>"; };
+		3A7E5BBF462F6A93E7FA579F /* LibrarySpacePanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySpacePanel.swift; sourceTree = "<group>"; };
+		3EBEA2900B8E2AFD62DFD671 /* ARSmartLibrary.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ARSmartLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		42911B7271C6BCADFAC0325B /* ShelfGuidance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfGuidance.swift; sourceTree = "<group>"; };
+		4CC472B8145D8BF60400048C /* ARViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewContainer.swift; sourceTree = "<group>"; };
+		50F1889AF4177F096F6983A8 /* BookMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMatcherTests.swift; sourceTree = "<group>"; };
+		5B7A839D45D4D60BE59625A1 /* ScanCandidateTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCandidateTrackerTests.swift; sourceTree = "<group>"; };
+		5FBDBC05FB064D1C1FA51656 /* LibrarySpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySpace.swift; sourceTree = "<group>"; };
+		63EBB46DBC8009C90E5B8A53 /* ARSmartLibraryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSmartLibraryApp.swift; sourceTree = "<group>"; };
+		65A7BDF448F0352A7D9617D9 /* ReadingListStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListStoreTests.swift; sourceTree = "<group>"; };
+		6877148BBC8CFFECC31A3F70 /* RecommendationEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationEngineTests.swift; sourceTree = "<group>"; };
+		6FC46D57276231EFE5D2E0C6 /* LibrarySpaceControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySpaceControllerTests.swift; sourceTree = "<group>"; };
+		75EF51C531FFCF4AEE15BAB4 /* CatalogQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogQuery.swift; sourceTree = "<group>"; };
+		76EC7890F614D0F865BE7C62 /* LibrarySpaceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySpaceStore.swift; sourceTree = "<group>"; };
+		7B675937DA4E30DFA6D4D901 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
+		89540A698A7D78A1DD64EEA1 /* LibrarySpaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySpaceController.swift; sourceTree = "<group>"; };
+		8D95AC8A052606B61A7D4081 /* BookCatalog.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BookCatalog.json; sourceTree = "<group>"; };
+		9901ADE773B35949651F19A0 /* DepthSampler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthSampler.swift; sourceTree = "<group>"; };
+		994CAC1581198AEC723B5650 /* ScanTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanTarget.swift; sourceTree = "<group>"; };
+		9D7DB05AAB3D391C6ACAB766 /* BookMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMatcher.swift; sourceTree = "<group>"; };
+		A65FA9D5E672224B1319457E /* ARSmartLibraryTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ARSmartLibraryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A979B4002363063261DFB873 /* LibrarySpaceTaskCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySpaceTaskCard.swift; sourceTree = "<group>"; };
+		B06C9DFB0635D5FE661EC913 /* LibrarySpaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySpaceTests.swift; sourceTree = "<group>"; };
+		BF2D4F5345EFB99CB6A7E194 /* ShelfGuidanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfGuidanceTests.swift; sourceTree = "<group>"; };
+		C184A0CF6047AC9984720E8D /* ScanCandidateTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCandidateTracker.swift; sourceTree = "<group>"; };
+		C2744F0AA2723487DA318AF5 /* LibraryTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTheme.swift; sourceTree = "<group>"; };
+		D176B89B2F365916695891E7 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		D59B5BD069A66B4282A9496B /* RecommendationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationEngine.swift; sourceTree = "<group>"; };
+		D69A0781B7258B75F629BC91 /* CatalogBookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBookDetailView.swift; sourceTree = "<group>"; };
+		E30BF84F5AC6234251E14CF1 /* ARSessionControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSessionControllerTests.swift; sourceTree = "<group>"; };
+		E7E88FEBAE98C1514EBF188C /* CatalogBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBrowserView.swift; sourceTree = "<group>"; };
+		EFEEBC745884ECB86CAAC406 /* BookCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCatalog.swift; sourceTree = "<group>"; };
+		FC58F5B210C7F575B3B660D5 /* ShelfPlacementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfPlacementTests.swift; sourceTree = "<group>"; };
+		FF250E3110C182BABE8A170F /* BookDetailCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailCard.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		1BA622542D2F762CCC473BD4 /* AR */ = {
+			isa = PBXGroup;
+			children = (
+				1D0160C335F4709693296A10 /* ARSessionController.swift */,
+				4CC472B8145D8BF60400048C /* ARViewContainer.swift */,
+				9901ADE773B35949651F19A0 /* DepthSampler.swift */,
+				89540A698A7D78A1DD64EEA1 /* LibrarySpaceController.swift */,
+			);
+			path = AR;
+			sourceTree = "<group>";
+		};
+		29475118D7E780682FC145E5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FF250E3110C182BABE8A170F /* BookDetailCard.swift */,
+				D69A0781B7258B75F629BC91 /* CatalogBookDetailView.swift */,
+				E7E88FEBAE98C1514EBF188C /* CatalogBrowserView.swift */,
+				3A7E5BBF462F6A93E7FA579F /* LibrarySpacePanel.swift */,
+				A979B4002363063261DFB873 /* LibrarySpaceTaskCard.swift */,
+				C2744F0AA2723487DA318AF5 /* LibraryTheme.swift */,
+				7B675937DA4E30DFA6D4D901 /* ScannerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4888FA6FCE6CE1192FDAFC0C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				EFEEBC745884ECB86CAAC406 /* BookCatalog.swift */,
+				9D7DB05AAB3D391C6ACAB766 /* BookMatcher.swift */,
+				75EF51C531FFCF4AEE15BAB4 /* CatalogQuery.swift */,
+				76EC7890F614D0F865BE7C62 /* LibrarySpaceStore.swift */,
+				36AEE8763796833017B64FFC /* ReadingListStore.swift */,
+				D59B5BD069A66B4282A9496B /* RecommendationEngine.swift */,
+				C184A0CF6047AC9984720E8D /* ScanCandidateTracker.swift */,
+				42911B7271C6BCADFAC0325B /* ShelfGuidance.swift */,
+				1FB16BD2EA944D8D33B709E9 /* ShelfPlacement.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		613FC25D5E77BFA4FEC771FD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3EBEA2900B8E2AFD62DFD671 /* ARSmartLibrary.app */,
+				A65FA9D5E672224B1319457E /* ARSmartLibraryTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		745F7769A6991A69C7120A2E /* ARSmartLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				85FB0672EE3512AE6E323E08 /* App */,
+				1BA622542D2F762CCC473BD4 /* AR */,
+				D1F79EF951D1198373E7CEFE /* Models */,
+				ABF509FE769279C03B0BCE58 /* Resources */,
+				4888FA6FCE6CE1192FDAFC0C /* Services */,
+				29475118D7E780682FC145E5 /* Views */,
+			);
+			path = ARSmartLibrary;
+			sourceTree = "<group>";
+		};
+		7C5C8642719EA3E0C530FFA4 /* ARSmartLibraryTests */ = {
+			isa = PBXGroup;
+			children = (
+				E30BF84F5AC6234251E14CF1 /* ARSessionControllerTests.swift */,
+				185440AB2EFF6BC77B4DE062 /* BookCatalogTests.swift */,
+				50F1889AF4177F096F6983A8 /* BookMatcherTests.swift */,
+				1208EF47EF7C47A02F2FA755 /* CatalogQueryTests.swift */,
+				6FC46D57276231EFE5D2E0C6 /* LibrarySpaceControllerTests.swift */,
+				B06C9DFB0635D5FE661EC913 /* LibrarySpaceTests.swift */,
+				65A7BDF448F0352A7D9617D9 /* ReadingListStoreTests.swift */,
+				6877148BBC8CFFECC31A3F70 /* RecommendationEngineTests.swift */,
+				5B7A839D45D4D60BE59625A1 /* ScanCandidateTrackerTests.swift */,
+				1DF84B0DB8B5F77208D3747C /* ScanTargetTests.swift */,
+				BF2D4F5345EFB99CB6A7E194 /* ShelfGuidanceTests.swift */,
+				FC58F5B210C7F575B3B660D5 /* ShelfPlacementTests.swift */,
+			);
+			path = ARSmartLibraryTests;
+			sourceTree = "<group>";
+		};
+		85FB0672EE3512AE6E323E08 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				63EBB46DBC8009C90E5B8A53 /* ARSmartLibraryApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		ABF509FE769279C03B0BCE58 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8D95AC8A052606B61A7D4081 /* BookCatalog.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D00818E8AA4CD5FF819A852C = {
+			isa = PBXGroup;
+			children = (
+				745F7769A6991A69C7120A2E /* ARSmartLibrary */,
+				7C5C8642719EA3E0C530FFA4 /* ARSmartLibraryTests */,
+				613FC25D5E77BFA4FEC771FD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D1F79EF951D1198373E7CEFE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D176B89B2F365916695891E7 /* Book.swift */,
+				5FBDBC05FB064D1C1FA51656 /* LibrarySpace.swift */,
+				994CAC1581198AEC723B5650 /* ScanTarget.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		490B17A450590F7C4179981F /* ARSmartLibrary */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ECB49EE6C2FB4C1B0B76E274 /* Build configuration list for PBXNativeTarget "ARSmartLibrary" */;
+			buildPhases = (
+				9B249ECA315C30D17C6C8DF8 /* Sources */,
+				BA23FFA83189537483DF6047 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ARSmartLibrary;
+			packageProductDependencies = (
+			);
+			productName = ARSmartLibrary;
+			productReference = 3EBEA2900B8E2AFD62DFD671 /* ARSmartLibrary.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CCA8386DCC922652FDCB1B9D /* ARSmartLibraryTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4885392F6EA1A5D8DF112C13 /* Build configuration list for PBXNativeTarget "ARSmartLibraryTests" */;
+			buildPhases = (
+				7753D6258F177A2207BA0627 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				71AAD1972F13665E7D071494 /* PBXTargetDependency */,
+			);
+			name = ARSmartLibraryTests;
+			packageProductDependencies = (
+			);
+			productName = ARSmartLibraryTests;
+			productReference = A65FA9D5E672224B1319457E /* ARSmartLibraryTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D34D0067EDD20417B2E74D92 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					490B17A450590F7C4179981F = {
+						DevelopmentTeam = 4YQ7VQ28J7;
+						ProvisioningStyle = Automatic;
+					};
+					CCA8386DCC922652FDCB1B9D = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 59A2D15F965D28AE48EA6BA8 /* Build configuration list for PBXProject "ARSmartLibrary" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = D00818E8AA4CD5FF819A852C;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 613FC25D5E77BFA4FEC771FD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				490B17A450590F7C4179981F /* ARSmartLibrary */,
+				CCA8386DCC922652FDCB1B9D /* ARSmartLibraryTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BA23FFA83189537483DF6047 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D14ED4CD31B349FBADF8CB86 /* BookCatalog.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7753D6258F177A2207BA0627 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED70EEEB6232288BEA37A8DA /* ARSessionControllerTests.swift in Sources */,
+				C4E8877B3CCA9AEBA2B7663D /* BookCatalogTests.swift in Sources */,
+				7DE6D4AE12DE989250CAA664 /* BookMatcherTests.swift in Sources */,
+				22E4AEE8DFB2B47C3C111348 /* CatalogQueryTests.swift in Sources */,
+				4CBA71077084CC52324D06A5 /* LibrarySpaceControllerTests.swift in Sources */,
+				9C8A2A1952A14AD06A21300E /* LibrarySpaceTests.swift in Sources */,
+				7251878C0BBE40DA7D601A40 /* ReadingListStoreTests.swift in Sources */,
+				AC59344E86751E3355F219E1 /* RecommendationEngineTests.swift in Sources */,
+				2D5AF535B66A9D9C4DFB82D3 /* ScanCandidateTrackerTests.swift in Sources */,
+				FB2E7BA4A9148DC627119C2B /* ScanTargetTests.swift in Sources */,
+				215F487D8BE31B18A17EAEEE /* ShelfGuidanceTests.swift in Sources */,
+				E61E1CE0EE8C0932E7599A17 /* ShelfPlacementTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B249ECA315C30D17C6C8DF8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F68C5AAF9C0D0035B237EE0 /* ARSessionController.swift in Sources */,
+				5024A24F8FBD2F1F44A60FC4 /* ARSmartLibraryApp.swift in Sources */,
+				BF7D9621AECD02AF2D560074 /* ARViewContainer.swift in Sources */,
+				A18C5CC949E522B7B0524142 /* Book.swift in Sources */,
+				17E0A638E2849B250074EA95 /* BookCatalog.swift in Sources */,
+				A43ED68D8D5C95B85ADCBE8A /* BookDetailCard.swift in Sources */,
+				1662E2EFC0E5089F24799E9A /* BookMatcher.swift in Sources */,
+				26A678AE6899F48F22A3340C /* CatalogBookDetailView.swift in Sources */,
+				8D3FF6C2E375EB06DE1859EE /* CatalogBrowserView.swift in Sources */,
+				52A2FE227AFF467FCE0677C4 /* CatalogQuery.swift in Sources */,
+				122A6786A7BBAEDC5E227DB5 /* DepthSampler.swift in Sources */,
+				FAFFC67DEB2486971C651D6A /* LibrarySpace.swift in Sources */,
+				6056452DFE7C55F100A8E387 /* LibrarySpaceController.swift in Sources */,
+				1186E6425A8440857F06FC43 /* LibrarySpacePanel.swift in Sources */,
+				8829CAC529393BCD555F9AE6 /* LibrarySpaceStore.swift in Sources */,
+				588AFB8294AD0105E732579D /* LibrarySpaceTaskCard.swift in Sources */,
+				AC5468C962658AD9F00A756B /* LibraryTheme.swift in Sources */,
+				B0909FCBEEDF99AD51EE3B9E /* ReadingListStore.swift in Sources */,
+				A9410F70A105322694A7E107 /* RecommendationEngine.swift in Sources */,
+				70D943AF8CCEB9817A391DA5 /* ScanCandidateTracker.swift in Sources */,
+				847076B638367057CA881ECE /* ScanTarget.swift in Sources */,
+				1DF9FA0EB7364B2D03A84D3D /* ScannerView.swift in Sources */,
+				7C564155EBF2169CD1F3218B /* ShelfGuidance.swift in Sources */,
+				82779628B9668E322D0CDC91 /* ShelfPlacement.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		71AAD1972F13665E7D071494 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 490B17A450590F7C4179981F /* ARSmartLibrary */;
+			targetProxy = 04F04D34DA44075FECFCD654 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		31853403C0AD698FDE8B0F71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 4YQ7VQ28J7;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ARSmartLibrary/Supporting/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.rithikmeedinti.ARSmartLibrary;
+				PRODUCT_MODULE_NAME = ARSmartLibrary;
+				PRODUCT_NAME = "AR Smart Library";
+				SDKROOT = iphoneos;
+				SWIFT_STRICT_CONCURRENCY = targeted;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		7FB32BBCDA25317D8C7DE609 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		907F050B6534C8B86472C3B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 4YQ7VQ28J7;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ARSmartLibrary/Supporting/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.rithikmeedinti.ARSmartLibrary;
+				PRODUCT_MODULE_NAME = ARSmartLibrary;
+				PRODUCT_NAME = "AR Smart Library";
+				SDKROOT = iphoneos;
+				SWIFT_STRICT_CONCURRENCY = targeted;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		9949BDBCD101586ADC83470A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.rithikmeedinti.ARSmartLibraryTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AR Smart Library.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AR Smart Library";
+			};
+			name = Release;
+		};
+		A6551D262E0B5718666065C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.rithikmeedinti.ARSmartLibraryTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AR Smart Library.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AR Smart Library";
+			};
+			name = Debug;
+		};
+		F7C22AB77500B2E178DA1004 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4885392F6EA1A5D8DF112C13 /* Build configuration list for PBXNativeTarget "ARSmartLibraryTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A6551D262E0B5718666065C7 /* Debug */,
+				9949BDBCD101586ADC83470A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		59A2D15F965D28AE48EA6BA8 /* Build configuration list for PBXProject "ARSmartLibrary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F7C22AB77500B2E178DA1004 /* Debug */,
+				7FB32BBCDA25317D8C7DE609 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		ECB49EE6C2FB4C1B0B76E274 /* Build configuration list for PBXNativeTarget "ARSmartLibrary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				31853403C0AD698FDE8B0F71 /* Debug */,
+				907F050B6534C8B86472C3B2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D34D0067EDD20417B2E74D92 /* Project object */;
+}

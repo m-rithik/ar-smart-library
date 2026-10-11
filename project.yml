@@ -1,0 +1,88 @@
+name: ARSmartLibrary
+
+options:
+  bundleIdPrefix: com.rithikmeedinti
+  deploymentTarget:
+    iOS: "18.0"
+  xcodeVersion: "16.2"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    IPHONEOS_DEPLOYMENT_TARGET: "18.0"
+    TARGETED_DEVICE_FAMILY: "1"
+    CODE_SIGN_STYLE: Automatic
+    DEVELOPMENT_TEAM: ""
+    CURRENT_PROJECT_VERSION: "1"
+    MARKETING_VERSION: "1.0"
+
+targets:
+  ARSmartLibrary:
+    type: application
+    platform: iOS
+    sources:
+      - path: ARSmartLibrary
+        excludes:
+          - Resources
+          - Supporting
+      - path: ARSmartLibrary/Resources
+        buildPhase: resources
+    info:
+      path: ARSmartLibrary/Supporting/Info.plist
+      properties:
+        CFBundleDisplayName: AR Smart Library
+        NSCameraUsageDescription: AR Smart Library uses the camera and LiDAR sensor to recognize books and anchor information beside them.
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+        UILaunchScreen: {}
+        UIRequiredDeviceCapabilities:
+          - arm64
+          - arkit
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.rithikmeedinti.ARSmartLibrary
+        DEVELOPMENT_TEAM: 4YQ7VQ28J7
+        PRODUCT_NAME: AR Smart Library
+        PRODUCT_MODULE_NAME: ARSmartLibrary
+        GENERATE_INFOPLIST_FILE: false
+        ENABLE_PREVIEWS: true
+        SWIFT_STRICT_CONCURRENCY: targeted
+        TARGETED_DEVICE_FAMILY: "1"
+  ARSmartLibraryTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: ARSmartLibraryTests
+    dependencies:
+      - target: ARSmartLibrary
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.rithikmeedinti.ARSmartLibraryTests
+        GENERATE_INFOPLIST_FILE: true
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/AR Smart Library.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AR Smart Library"
+        BUNDLE_LOADER: "$(TEST_HOST)"
+
+schemes:
+  ARSmartLibrary:
+    build:
+      targets:
+        ARSmartLibrary: all
+        ARSmartLibraryTests:
+          - test
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - ARSmartLibraryTests
+      environmentVariables:
+        AR_SMART_LIBRARY_TESTING: "1"
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release

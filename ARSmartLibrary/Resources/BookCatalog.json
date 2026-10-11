@@ -1,0 +1,110 @@
+[
+  {
+    "id": "pride-and-prejudice",
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "genre": "Romance",
+    "rating": 4.6,
+    "summary": "Elizabeth Bennet and Fitzwilliam Darcy confront pride, first impressions, and social expectations.",
+    "keywords": ["society", "relationships", "wit", "family", "class"]
+  },
+  {
+    "id": "jane-eyre",
+    "title": "Jane Eyre",
+    "author": "Charlotte Brontë",
+    "genre": "Romance",
+    "rating": 4.5,
+    "summary": "An independent governess searches for dignity, belonging, and love while guarding her principles.",
+    "keywords": ["independence", "relationships", "identity", "class", "mystery"]
+  },
+  {
+    "id": "wuthering-heights",
+    "title": "Wuthering Heights",
+    "author": "Emily Brontë",
+    "genre": "Gothic",
+    "rating": 4.2,
+    "summary": "A destructive bond between Catherine and Heathcliff echoes across two generations on the moors.",
+    "keywords": ["relationships", "revenge", "class", "isolation", "family"]
+  },
+  {
+    "id": "frankenstein",
+    "title": "Frankenstein",
+    "author": "Mary Shelley",
+    "genre": "Gothic",
+    "rating": 4.4,
+    "summary": "A scientist creates life and then abandons it, setting creator and creation on a tragic path.",
+    "keywords": ["science", "identity", "isolation", "responsibility", "ambition"]
+  },
+  {
+    "id": "dracula",
+    "title": "Dracula",
+    "author": "Bram Stoker",
+    "genre": "Gothic",
+    "rating": 4.3,
+    "summary": "A group of allies confronts Count Dracula as his influence spreads from Transylvania to England.",
+    "keywords": ["mystery", "fear", "identity", "friendship", "supernatural"]
+  },
+  {
+    "id": "the-time-machine",
+    "title": "The Time Machine",
+    "author": "H. G. Wells",
+    "genre": "Science Fiction",
+    "rating": 4.1,
+    "summary": "A Victorian inventor travels into a distant future divided by the consequences of social inequality.",
+    "keywords": ["science", "society", "class", "future", "exploration"]
+  },
+  {
+    "id": "the-war-of-the-worlds",
+    "title": "The War of the Worlds",
+    "author": "H. G. Wells",
+    "genre": "Science Fiction",
+    "rating": 4.2,
+    "summary": "An unnamed narrator struggles to survive after technologically superior Martians invade England.",
+    "keywords": ["science", "survival", "society", "invasion", "fear"]
+  },
+  {
+    "id": "the-great-gatsby",
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "genre": "Classic",
+    "rating": 4.3,
+    "summary": "Jay Gatsby pursues an idealized past amid wealth, performance, and disillusionment in the Jazz Age.",
+    "keywords": ["society", "class", "relationships", "ambition", "identity"]
+  },
+  {
+    "id": "moby-dick",
+    "title": "Moby-Dick",
+    "author": "Herman Melville",
+    "genre": "Adventure",
+    "rating": 4.1,
+    "summary": "Ishmael joins Captain Ahab's obsessive voyage to hunt the white whale that maimed him.",
+    "keywords": ["exploration", "obsession", "nature", "identity", "survival"]
+  },
+  {
+    "id": "little-women",
+    "title": "Little Women",
+    "author": "Louisa May Alcott",
+    "genre": "Coming of Age",
+    "rating": 4.6,
+    "summary": "The four March sisters grow toward adulthood while balancing family, creativity, work, and love.",
+    "keywords": ["family", "identity", "relationships", "independence", "ambition"]
+  },
+  {
+    "id": "sherlock-holmes",
+    "title": "The Adventures of Sherlock Holmes",
+    "author": "Arthur Conan Doyle",
+    "genre": "Mystery",
+    "rating": 4.7,
+    "summary": "Sherlock Holmes and Dr. Watson investigate twelve cases through observation and deduction.",
+    "keywords": ["mystery", "reasoning", "friendship", "identity", "crime"]
+  },
+  {
+    "id": "dorian-gray",
+    "title": "The Picture of Dorian Gray",
+    "author": "Oscar Wilde",
+    "genre": "Gothic",
+    "rating": 4.4,
+    "summary": "A young man preserves his beauty while a hidden portrait records the cost of his choices.",
+    "keywords": ["identity", "society", "ambition", "morality", "supernatural"]
+  }
+]
