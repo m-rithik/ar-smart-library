@@ -32,6 +32,8 @@ targets:
       path: ARSmartLibrary/Supporting/Info.plist
       properties:
         CFBundleDisplayName: AR Smart Library
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         NSCameraUsageDescription: AR Smart Library uses the camera and LiDAR sensor to recognize books and anchor information beside them.
         UIApplicationSceneManifest:
           UIApplicationSupportsMultipleScenes: false
