@@ -18,13 +18,13 @@ The app performs all recognition and ranking on the phone. It has no server or t
 ## Requirements
 
 - iPhone 17 Pro or another ARKit-capable iPhone; LiDAR is used when available.
-- A Mac with an Xcode version that supports the iOS version installed on the phone.
+- A Mac with Xcode to build and sign the app. Running through Xcode's debugger also requires support for the connected phone.
 - Check the phone's iOS version against [Apple's Xcode device support and macOS requirements](https://developer.apple.com/xcode/system-requirements).
 - An Apple Account added to Xcode. A paid developer membership is not required for testing on your own phone.
 
 ## Install on iPhone 17 Pro
 
-1. Check that the installed Xcode supports the phone's current iOS version. This project does not require you to update your Mac to continue developing and testing the catalog and non-hardware logic in Simulator. If the phone cannot be prepared by your Xcode, use a compatible development Mac for the physical AR test; changing the app's deployment target does not fix device-support errors.
+1. Check that the installed Xcode supports the phone's current iOS version. This project does not require you to update your Mac to continue developing and testing the catalog and non-hardware logic in Simulator. If Xcode cannot prepare the phone, see the USB installation option below; changing the app's deployment target does not fix device-support errors.
 2. Open `ARSmartLibrary.xcodeproj` in Xcode.
 3. Connect the iPhone by USB-C, unlock it, and tap **Trust** if prompted.
 4. In Xcode, open **Settings > Accounts** and add your Apple Account.
@@ -34,7 +34,21 @@ The app performs all recognition and ranking on the phone. It has no server or t
 8. If requested, enable **Settings > Privacy & Security > Developer Mode** on the iPhone, restart it, confirm Developer Mode, and press **Run** again.
 9. Allow camera access when the app launches.
 
-A free Personal Team profile expires after seven days; reconnect and run from Xcode again to reinstall it.
+A free Personal Team profile expires after seven days; reconnect, renew the profile in Xcode, and rebuild and reinstall the app.
+
+### USB installation when Xcode cannot prepare the phone
+
+On October 12, 2026, installation succeeded on an iPhone 17 Pro running iOS 27.0 beta (24A435), using macOS 15.3.1 without updating macOS. Xcode 16.4 created the Personal Team provisioning profile for the connected phone. Xcode 16.2 then built and signed the Release app. Xcode's installer remained blocked by a missing developer disk image variant, but [ideviceinstaller](https://github.com/libimobiledevice/ideviceinstaller) installed the signed IPA over USB, and the phone reported `ProfileValidated = true`.
+
+This route requires a valid Apple signing certificate and an unexpired provisioning profile that includes the phone. It does not provide Xcode debugging support. With a freshly signed IPA at `build/ARSmartLibrary.ipa` and the phone connected and trusted:
+
+```sh
+brew install ideviceinstaller
+ideviceinstaller install build/ARSmartLibrary.ipa
+ideviceinstaller list --bundle-identifier com.rithikmeedinti.ARSmartLibrary
+```
+
+The signed IPA is a local build artifact and is not committed to Git. Package only the `Payload` directory and exclude `._*` and `.DS_Store` metadata files. Open **AR Smart Library** on the phone after installation and allow camera access. Physical AR behavior still needs the acceptance checks below.
 
 ## Use
 
