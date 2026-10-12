@@ -93,7 +93,8 @@ private struct ScannerScene: View {
                         .allowsHitTesting(false)
                 }
 
-                if let point = spaceController.shelfScreenPosition,
+                if spaceController.isAtShelf,
+                   let point = spaceController.shelfScreenPosition,
                    let placement = spaceController.targetPlacement,
                    CGRect(origin: .zero, size: geometry.size).contains(point) {
                     Label("\(placement.shelf.label) · \(placement.shelf.row)", systemImage: "books.vertical.fill")
@@ -118,7 +119,13 @@ private struct ScannerScene: View {
                 VStack(spacing: 14) {
                     topBar
 
-                    Spacer()
+                    if controller.canUseAR, spaceController.targetBook != nil,
+                       spaceController.isLocalized, !spaceController.isAtShelf,
+                       let guidance = spaceController.guidance {
+                        NavigationArrowView(bearingDegrees: Double(guidance.bearingDegrees))
+                    } else {
+                        Spacer()
+                    }
 
                     ScrollView {
                         VStack(spacing: 12) {

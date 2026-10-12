@@ -51,11 +51,12 @@ struct LibrarySpaceTaskCard: View {
                 }
                 if controller.isLocalized, let guidance = controller.guidance {
                     adaptiveLayout {
-                        Image(systemName: controller.isAtShelf ? "scope" : "arrow.up")
-                            .font(.system(size: 36, weight: .bold))
-                            .rotationEffect(.degrees(controller.isAtShelf ? 0 : Double(guidance.bearingDegrees)))
-                            .foregroundStyle(controller.isAtShelf ? .cyan : .yellow)
-                            .accessibilityHidden(true)
+                        if controller.isAtShelf {
+                            Image(systemName: "scope")
+                                .font(.system(size: 36, weight: .bold))
+                                .foregroundStyle(.cyan)
+                                .accessibilityHidden(true)
+                        }
                         VStack(alignment: .leading, spacing: 4) {
                             Text(controller.routeStep).font(.subheadline.weight(.semibold))
                             if controller.isAtShelf {

@@ -105,7 +105,7 @@ Each shelf lists its assigned books and positions. Edit a book's assignment to m
 1. Open **Library** and search by title, author, genre, or topic. Search also covers summaries and keywords.
 2. Filter by genre or assigned locations, then open a book to read its full details and related titles. Choose **Take me to this book** for an assigned book, or **Scan for this title** for an unassigned one. Catalog browsing works without camera access or AR hardware; spatial actions explain when they are unavailable.
 3. After reopening the app, return to the reference entrance view and slowly look around. ARKit must align the camera with the saved map before any spatial directions appear. If alignment fails, **Retry room alignment** reloads the saved map; it never assumes alignment succeeded.
-4. Follow the direction arrow, distance, and yellow aisle-stop marker. The route visits the admin's stops in sequence, starting at the recorded entrance.
+4. Follow the large white arrow over the live camera and the distance to the next stop. The arrow gently moves forward and smoothly turns with your phone, including when the direction crosses behind you; Reduce Motion disables these animations. It disappears when tracking is unavailable or you reach the shelf. The route visits the admin's stops in sequence, starting at the recorded entrance; the yellow marker shows the current stop.
 5. At the destination, the **cyan outline** points out the shelf row. The card shows the shelf label, row, and book position.
 6. Tap **Scan title to confirm** to check the actual book through OCR. A stored assignment alone does not verify that a book has not moved.
 
@@ -171,7 +171,7 @@ Build output is kept outside the project folder to avoid Finder metadata signing
 
 ARKit scene depth and LiDAR must be tested on the physical iPhone; Simulator only verifies the build and non-hardware logic.
 
-Validated on October 12, 2026 with Xcode 16.2 and the iPhone 16 Pro Simulator running iOS 18.3: all 104 automated tests passed. Custom-book creation, search, persistence across app relaunch, duplicate warnings, and cancellation with unsaved details were checked in Simulator. Catalog details and reading-status persistence were also checked in the previous build. Physical-device acceptance below remains required before claiming real-room accuracy.
+Validated on October 12, 2026 with Xcode 16.2 and the iPhone 16 Pro Simulator running iOS 18.3: all 109 automated tests passed. The white arrow was visually checked in a separate Simulator preview at forward, right, and behind bearings and in a compact layout; real-room motion still needs the physical-device checks below. Custom-book creation, search, persistence across app relaunch, duplicate warnings, and cancellation with unsaved details were checked in Simulator. Catalog details and reading-status persistence were also checked in the previous build. Physical-device acceptance below remains required before claiming real-room accuracy.
 
 ### Physical-device acceptance checks
 
