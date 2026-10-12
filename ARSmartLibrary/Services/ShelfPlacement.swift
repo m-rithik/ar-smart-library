@@ -15,6 +15,9 @@ enum ShelfPlacement {
         var normal: SIMD3<Float>
         if let surfaceNormal {
             guard isFinite(surfaceNormal) else { return nil }
+            let surfaceLength = simd_length(surfaceNormal)
+            // A floor or shelf top must not become an upright row after flattening its normal.
+            guard surfaceLength > 0.001, abs(surfaceNormal.y) / surfaceLength < 0.35 else { return nil }
             normal = SIMD3(surfaceNormal.x, 0, surfaceNormal.z)
             let length = simd_length(normal)
             guard length.isFinite, length > 0.001 else { return nil }

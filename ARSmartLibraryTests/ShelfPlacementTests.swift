@@ -54,4 +54,12 @@ final class ShelfPlacementTests: XCTestCase {
         XCTAssertNil(ShelfPlacement.transform(at: .zero, cameraPosition: SIMD3(0, 0, 1), surfaceNormal: SIMD3(0, 1, 0)))
         XCTAssertNil(ShelfPlacement.transform(at: .zero, cameraPosition: SIMD3(0, 0, 1), surfaceNormal: SIMD3(.nan, 0, 1)))
     }
+
+    func testShelfTopAndSlopedSurfaceCannotBeFlattenedIntoVerticalRow() {
+        let point = SIMD3<Float>(0, 1, -2)
+        let camera = SIMD3<Float>(0, 1.5, 0)
+        XCTAssertNil(ShelfPlacement.transform(at: point, cameraPosition: camera, surfaceNormal: SIMD3(0.01, 1, 0.01)))
+        XCTAssertNil(ShelfPlacement.transform(at: point, cameraPosition: camera, surfaceNormal: SIMD3(0, 1, 1)))
+        XCTAssertNotNil(ShelfPlacement.transform(at: point, cameraPosition: camera, surfaceNormal: SIMD3(0, 0.1, 1)))
+    }
 }

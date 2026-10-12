@@ -14,12 +14,26 @@ struct LibrarySpaceTaskCard: View {
             if let draft = controller.pendingShelf {
                 Label("Place \(draft.label) · \(draft.row)", systemImage: "square.dashed")
                     .font(.headline)
-                Text("Start at the entrance and record a stop. Walk the route, recording stops at aisle turns. Face the shelf straight-on and aim the reticle at the row center to place its outline.")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                if !controller.isLocalized {
+                    RoomScanGuideView(controller: controller)
+                } else if controller.recordedStopCount == 0 {
+                    Text("1. Stand at the entrance, face into the room, and tap Record entrance.")
+                        .font(.subheadline)
+                } else {
+                    Text("2. Walk the clear aisle. Record each turn before you reach the shelf.")
+                        .font(.caption).foregroundStyle(.secondary)
+                    Label(controller.canPlaceShelf ? "3. Shelf ready to place" : "3. Scan the shelf front",
+                          systemImage: controller.canPlaceShelf ? "checkmark.circle" : "viewfinder")
+                        .font(.subheadline.weight(.semibold))
+                    Text(controller.shelfScanInstruction).font(.subheadline)
+                    if let distance = controller.shelfDistance {
+                        Text("\(distance, specifier: "%.1f") m from the shelf")
+                            .font(.caption).foregroundStyle(.secondary)
+                    }
+                }
                 adaptiveLayout {
                     Button(action: controller.recordRouteStop) {
-                        Text("Record stop (\(controller.recordedStopCount))")
+                        Text(controller.recordedStopCount == 0 ? "Record entrance" : "Record turn (\(controller.recordedStopCount))")
                             .frame(minHeight: 44)
                     }
                     .buttonStyle(.bordered)
@@ -34,7 +48,7 @@ struct LibrarySpaceTaskCard: View {
                     Text("Place shelf row here").frame(maxWidth: .infinity, minHeight: 44)
                 }
                 .buttonStyle(.borderedProminent)
-                .disabled(!controller.isLocalized || controller.recordedStopCount == 0)
+                .disabled(!controller.canPlaceShelf)
                 Button { confirmsCancellation = true } label: {
                     Text("Cancel placement").frame(minHeight: 44)
                 }
@@ -116,7 +130,12 @@ struct LibrarySpaceTaskCard: View {
             } else {
                 Label(controller.space?.name ?? "Set up the library", systemImage: "arkit")
                     .font(.headline)
-                Text(controller.mappingStatusText).font(.subheadline)
+                if controller.space == nil {
+                    Text("Create your library space in setup, then return here to scan the entrance and shelves.")
+                        .font(.subheadline)
+                } else {
+                    RoomScanGuideView(controller: controller)
+                }
                 Button(action: onOpenLibrary) {
                     Text("Manage shelves and book locations").frame(maxWidth: .infinity, minHeight: 44)
                 }

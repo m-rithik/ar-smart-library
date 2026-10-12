@@ -89,14 +89,18 @@ Custom books are stored locally and survive app restarts and app updates. Adding
 
 1. Tap the **books** button to open **Library**, then tap the **sliders** button to open **Library setup**.
 2. Name the room and tap **Create AR space**. This starts a working map. An older saved space stays on disk until a new save succeeds.
-3. Start at a recognizable entrance or aisle junction. Slowly scan walls, shelves, and the floor until the room is aligned.
+3. Start at a recognizable entrance or aisle junction. Follow the next-action card: slowly scan detailed shelf fronts and corners, move a little sideways, and pause if asked to slow down. The card distinguishes alignment, missing saved anchors, and map quality; “Visible area mapped” does not mean the entire room has been scanned.
 4. Open **Manage shelves and book locations** and expand **Add a shelf row**. Enter its label (for example, A3), row (second from top), physical width/height, and optional directions.
-5. Tap **Record route and place shelf**. At the entrance, tap **Record stop**. Walk the clear aisle route and record a stop at each turn. Keep consecutive route segments inside the walkable aisle. Undo removes the most recent stop.
-6. Aim the reticle at the center of the destination shelf row and tap **Place shelf row here**. The cyan outline follows the detected vertical shelf surface. When only depth is available, face the shelf straight-on because its orientation is estimated from the camera. Move closer or scan the surface if placement is unavailable.
+5. Tap **Record route and place shelf**. At the entrance, tap **Record entrance**. Walk the clear aisle route and use **Record turn** at each turn. Keep consecutive route segments inside the walkable aisle. Undo removes the most recent stop; undoing the entrance or canceling a draft also discards its staged reference photo.
+6. Aim at the front of the destination row from roughly 0.35–3 meters away. A live white outline previews its position. Hold steady until it turns cyan and **Place shelf row here** becomes available, then check the row and place it. The app prefers detected vertical planes and LiDAR mesh surfaces, rejects floor/top surfaces, and requires a stable position for at least half a second. Depth-only placement needs a high-confidence neighborhood and explicitly asks you to face the row straight-on because the angle is estimated. Tracking loss or a changed target resets readiness.
 7. Open Library again. Under **Assign or edit a book location**, choose a catalog book, the row, and a position such as “third from left.” Repeat for the books on that row.
 8. Repeat from the same entrance for other shelf rows. Scan the route and shelf surroundings from several angles, then tap **Save AR space** when available.
 
 The app stores the ARKit world map, named shelf/aisle anchors, book assignments, and an entrance reference image together in one atomic local file. Save is blocked while placement is unfinished or tracking is unavailable. Removing a shelf also removes its book assignments; save to persist the removal. The last shelf can be removed and the resulting empty map saved.
+
+Camera, gyroscope, and accelerometer data are fused by ARKit in a gravity-aligned local room map; available LiDAR depth adds surface measurements. Depth sampling rejects low-confidence readings and mixed foreground/background patches instead of accepting one unreliable pixel. These checks do not replace physical testing of reflective or featureless shelves.
+
+Under **Room location · optional**, tap **Add room location** to capture a location tag. Permission is requested only after that tap, and scanning works if access is denied. The app accepts a recent fix with a reported accuracy within 100 meters, stores it only with the local saved room, and supports removing it. This identifies the building area; GPS is never used to place shelves or declare room alignment. No background location tracking or server upload is used. Existing saved rooms without a geotag remain compatible.
 
 Each shelf lists its assigned books and positions. Edit a book's assignment to move it or correct its slot; remove an individual assignment without deleting the shelf or other books. Switching away from an unfinished route asks before discarding it. A failed restore keeps the working map and draft intact.
 
@@ -171,10 +175,13 @@ Build output is kept outside the project folder to avoid Finder metadata signing
 
 ARKit scene depth and LiDAR must be tested on the physical iPhone; Simulator only verifies the build and non-hardware logic.
 
-Validated on October 12, 2026 with Xcode 16.2 and the iPhone 16 Pro Simulator running iOS 18.3: all 109 automated tests passed. The white arrow was visually checked in a separate Simulator preview at forward, right, and behind bearings and in a compact layout; real-room motion still needs the physical-device checks below. Custom-book creation, search, persistence across app relaunch, duplicate warnings, and cancellation with unsaved details were checked in Simulator. Catalog details and reading-status persistence were also checked in the previous build. Physical-device acceptance below remains required before claiming real-room accuracy.
+Validated on October 12, 2026 with Xcode 16.2 and the iPhone 16 Pro Simulator running iOS 18.3: all 144 automated tests passed. Version 1.3 (build 4) also compiled for an iPhone Release build with signing disabled; signing and installation are pending. Room guidance, shelf setup controls, large-text layout, and optional location permission denial/capture were checked in a separate Simulator preview using simulated location data. The white arrow was visually checked in a separate Simulator preview at forward, right, and behind bearings and in a compact layout; real-room motion still needs the physical-device checks below. Custom-book creation, search, persistence across app relaunch, duplicate warnings, and cancellation with unsaved details were checked in Simulator. Catalog details and reading-status persistence were also checked in the previous build. Physical-device acceptance below remains required before claiming real-room accuracy.
 
 ### Physical-device acceptance checks
 
+- Scan a row from several angles. Check the preview against the real shelf, wait for ready, and place it. Moving the target, pointing at a floor/top surface, or losing tracking must disable placement. Verify both LiDAR and plane-only behavior.
+- Cancel a first route or undo its entrance, then record a different entrance view. Confirm only the committed route supplies the saved reference photo.
+- Add and remove the optional room geotag, save and reopen, and verify it never changes shelf alignment. Deny location access and confirm mapping still works.
 - Create two shelf rows with different routes, assign books, save, force-quit, and reopen near the entrance. Verify outlines return to the same rows only after alignment.
 - Search for an assigned title/author/topic; visit every recorded stop and verify the correct row and slot label at arrival.
 - Move away after arrival; the display must return to approach guidance. End directions and verify ordinary OCR scanning resumes.

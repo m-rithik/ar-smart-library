@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		006E75BEC898845059F7016C /* RoomGeotagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBA5A7F52C63302A09C5112 /* RoomGeotagTests.swift */; };
+		05F2B97FA4BF32A1B7E69410 /* RoomGeotag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F26037F49CB69ACB0E701B6 /* RoomGeotag.swift */; };
 		0F68C5AAF9C0D0035B237EE0 /* ARSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0160C335F4709693296A10 /* ARSessionController.swift */; };
 		1186E6425A8440857F06FC43 /* LibrarySpacePanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E5BBF462F6A93E7FA579F /* LibrarySpacePanel.swift */; };
 		122A6786A7BBAEDC5E227DB5 /* DepthSampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9901ADE773B35949651F19A0 /* DepthSampler.swift */; };
@@ -18,10 +20,12 @@
 		22E4AEE8DFB2B47C3C111348 /* CatalogQueryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1208EF47EF7C47A02F2FA755 /* CatalogQueryTests.swift */; };
 		26A678AE6899F48F22A3340C /* CatalogBookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69A0781B7258B75F629BC91 /* CatalogBookDetailView.swift */; };
 		2D5AF535B66A9D9C4DFB82D3 /* ScanCandidateTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7A839D45D4D60BE59625A1 /* ScanCandidateTrackerTests.swift */; };
+		389174C9A574666DCBCA76E5 /* RoomGeotagIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83D9B7F6FB896C90DA4F31B /* RoomGeotagIntegrationTests.swift */; };
 		4CBA71077084CC52324D06A5 /* LibrarySpaceControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC46D57276231EFE5D2E0C6 /* LibrarySpaceControllerTests.swift */; };
 		5024A24F8FBD2F1F44A60FC4 /* ARSmartLibraryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EBB46DBC8009C90E5B8A53 /* ARSmartLibraryApp.swift */; };
 		52A2FE227AFF467FCE0677C4 /* CatalogQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EF51C531FFCF4AEE15BAB4 /* CatalogQuery.swift */; };
 		588AFB8294AD0105E732579D /* LibrarySpaceTaskCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A979B4002363063261DFB873 /* LibrarySpaceTaskCard.swift */; };
+		5ADB8CD25C8013F2BC965D7E /* ShelfPlacementStability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ADAF0093538710698AECF3 /* ShelfPlacementStability.swift */; };
 		6056452DFE7C55F100A8E387 /* LibrarySpaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89540A698A7D78A1DD64EEA1 /* LibrarySpaceController.swift */; };
 		70D943AF8CCEB9817A391DA5 /* ScanCandidateTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C184A0CF6047AC9984720E8D /* ScanCandidateTracker.swift */; };
 		7251878C0BBE40DA7D601A40 /* ReadingListStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A7BDF448F0352A7D9617D9 /* ReadingListStoreTests.swift */; };
@@ -32,6 +36,9 @@
 		847076B638367057CA881ECE /* ScanTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994CAC1581198AEC723B5650 /* ScanTarget.swift */; };
 		8829CAC529393BCD555F9AE6 /* LibrarySpaceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EC7890F614D0F865BE7C62 /* LibrarySpaceStore.swift */; };
 		8D3FF6C2E375EB06DE1859EE /* CatalogBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E88FEBAE98C1514EBF188C /* CatalogBrowserView.swift */; };
+		90FEB41E25D9FC55898C9FD5 /* RoomScanGuidanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562772109A77BA49A4361492 /* RoomScanGuidanceTests.swift */; };
+		94F3F9121BF8349CDEA399F1 /* DepthSamplerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95AE567130B62D3F3BDA6D2 /* DepthSamplerTests.swift */; };
+		95F2AB1B5DE16B820E195531 /* RoomLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3180E6908E1D160FE75CA2F /* RoomLocationService.swift */; };
 		9C8A2A1952A14AD06A21300E /* LibrarySpaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06C9DFB0635D5FE661EC913 /* LibrarySpaceTests.swift */; };
 		A18C5CC949E522B7B0524142 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = D176B89B2F365916695891E7 /* Book.swift */; };
 		A43ED68D8D5C95B85ADCBE8A /* BookDetailCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF250E3110C182BABE8A170F /* BookDetailCard.swift */; };
@@ -43,9 +50,13 @@
 		BF7D9621AECD02AF2D560074 /* ARViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC472B8145D8BF60400048C /* ARViewContainer.swift */; };
 		C329F148B0B6673C7A034818 /* CustomBookStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754C8877B978430CBD991E6E /* CustomBookStoreTests.swift */; };
 		C4E8877B3CCA9AEBA2B7663D /* BookCatalogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185440AB2EFF6BC77B4DE062 /* BookCatalogTests.swift */; };
+		CED8AB8085BABB5BB6430EA3 /* RoomScanGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11DFB270DAE82539884F2A9 /* RoomScanGuideView.swift */; };
 		D14ED4CD31B349FBADF8CB86 /* BookCatalog.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D95AC8A052606B61A7D4081 /* BookCatalog.json */; };
 		E61E1CE0EE8C0932E7599A17 /* ShelfPlacementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC58F5B210C7F575B3B660D5 /* ShelfPlacementTests.swift */; };
 		ED70EEEB6232288BEA37A8DA /* ARSessionControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30BF84F5AC6234251E14CF1 /* ARSessionControllerTests.swift */; };
+		EEAC2302F695E6E94A755728 /* RoomLocationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C37E3DD0F3913025836F158 /* RoomLocationSection.swift */; };
+		F21903441290382BDFC6C379 /* RoomScanGuidance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12FAA854FF002FF5CC1B20 /* RoomScanGuidance.swift */; };
+		F618F65AE920D32503FE1523 /* ShelfPlacementStabilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D26AA971FA7204D16DC853 /* ShelfPlacementStabilityTests.swift */; };
 		F63ACA21C4728FE10563F576 /* NavigationArrowRotationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3D991015B7847B66B22954 /* NavigationArrowRotationTests.swift */; };
 		F9D132A3100CDF715C921323 /* CustomBookForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DD283E051D0A9C00E4A351 /* CustomBookForm.swift */; };
 		FAFFC67DEB2486971C651D6A /* LibrarySpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBDBC05FB064D1C1FA51656 /* LibrarySpace.swift */; };
@@ -63,18 +74,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03D26AA971FA7204D16DC853 /* ShelfPlacementStabilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfPlacementStabilityTests.swift; sourceTree = "<group>"; };
 		1208EF47EF7C47A02F2FA755 /* CatalogQueryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogQueryTests.swift; sourceTree = "<group>"; };
 		167FD518107DFEA43A8F5B59 /* NavigationArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationArrowView.swift; sourceTree = "<group>"; };
 		185440AB2EFF6BC77B4DE062 /* BookCatalogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCatalogTests.swift; sourceTree = "<group>"; };
+		1C37E3DD0F3913025836F158 /* RoomLocationSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomLocationSection.swift; sourceTree = "<group>"; };
 		1D0160C335F4709693296A10 /* ARSessionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSessionController.swift; sourceTree = "<group>"; };
 		1DF84B0DB8B5F77208D3747C /* ScanTargetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanTargetTests.swift; sourceTree = "<group>"; };
 		1FB16BD2EA944D8D33B709E9 /* ShelfPlacement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfPlacement.swift; sourceTree = "<group>"; };
 		36AEE8763796833017B64FFC /* ReadingListStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListStore.swift; sourceTree = "<group>"; };
 		3A7E5BBF462F6A93E7FA579F /* LibrarySpacePanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySpacePanel.swift; sourceTree = "<group>"; };
 		3EBEA2900B8E2AFD62DFD671 /* ARSmartLibrary.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ARSmartLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F12FAA854FF002FF5CC1B20 /* RoomScanGuidance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomScanGuidance.swift; sourceTree = "<group>"; };
+		3F26037F49CB69ACB0E701B6 /* RoomGeotag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomGeotag.swift; sourceTree = "<group>"; };
 		42911B7271C6BCADFAC0325B /* ShelfGuidance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfGuidance.swift; sourceTree = "<group>"; };
 		4CC472B8145D8BF60400048C /* ARViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewContainer.swift; sourceTree = "<group>"; };
 		50F1889AF4177F096F6983A8 /* BookMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMatcherTests.swift; sourceTree = "<group>"; };
+		562772109A77BA49A4361492 /* RoomScanGuidanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomScanGuidanceTests.swift; sourceTree = "<group>"; };
 		5B7A839D45D4D60BE59625A1 /* ScanCandidateTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCandidateTrackerTests.swift; sourceTree = "<group>"; };
 		5FBDBC05FB064D1C1FA51656 /* LibrarySpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySpace.swift; sourceTree = "<group>"; };
 		617886083E1E5DC79F003617 /* NavigationArrowRotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationArrowRotation.swift; sourceTree = "<group>"; };
@@ -87,18 +103,22 @@
 		76EC7890F614D0F865BE7C62 /* LibrarySpaceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySpaceStore.swift; sourceTree = "<group>"; };
 		7B675937DA4E30DFA6D4D901 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		89540A698A7D78A1DD64EEA1 /* LibrarySpaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySpaceController.swift; sourceTree = "<group>"; };
+		89ADAF0093538710698AECF3 /* ShelfPlacementStability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfPlacementStability.swift; sourceTree = "<group>"; };
 		8A3D991015B7847B66B22954 /* NavigationArrowRotationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationArrowRotationTests.swift; sourceTree = "<group>"; };
 		8D95AC8A052606B61A7D4081 /* BookCatalog.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BookCatalog.json; sourceTree = "<group>"; };
 		9901ADE773B35949651F19A0 /* DepthSampler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthSampler.swift; sourceTree = "<group>"; };
 		994CAC1581198AEC723B5650 /* ScanTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanTarget.swift; sourceTree = "<group>"; };
 		9D7DB05AAB3D391C6ACAB766 /* BookMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMatcher.swift; sourceTree = "<group>"; };
+		A3180E6908E1D160FE75CA2F /* RoomLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomLocationService.swift; sourceTree = "<group>"; };
 		A65FA9D5E672224B1319457E /* ARSmartLibraryTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ARSmartLibraryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A979B4002363063261DFB873 /* LibrarySpaceTaskCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySpaceTaskCard.swift; sourceTree = "<group>"; };
 		AD3900BC536CBF948BE224DB /* CustomBookStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBookStore.swift; sourceTree = "<group>"; };
 		B06C9DFB0635D5FE661EC913 /* LibrarySpaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySpaceTests.swift; sourceTree = "<group>"; };
 		BF2D4F5345EFB99CB6A7E194 /* ShelfGuidanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfGuidanceTests.swift; sourceTree = "<group>"; };
+		C11DFB270DAE82539884F2A9 /* RoomScanGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomScanGuideView.swift; sourceTree = "<group>"; };
 		C184A0CF6047AC9984720E8D /* ScanCandidateTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCandidateTracker.swift; sourceTree = "<group>"; };
 		C2744F0AA2723487DA318AF5 /* LibraryTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTheme.swift; sourceTree = "<group>"; };
+		CDBA5A7F52C63302A09C5112 /* RoomGeotagTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomGeotagTests.swift; sourceTree = "<group>"; };
 		D176B89B2F365916695891E7 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		D59B5BD069A66B4282A9496B /* RecommendationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationEngine.swift; sourceTree = "<group>"; };
 		D69A0781B7258B75F629BC91 /* CatalogBookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBookDetailView.swift; sourceTree = "<group>"; };
@@ -106,6 +126,8 @@
 		E7E88FEBAE98C1514EBF188C /* CatalogBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBrowserView.swift; sourceTree = "<group>"; };
 		EFEEBC745884ECB86CAAC406 /* BookCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCatalog.swift; sourceTree = "<group>"; };
 		F7DD283E051D0A9C00E4A351 /* CustomBookForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBookForm.swift; sourceTree = "<group>"; };
+		F83D9B7F6FB896C90DA4F31B /* RoomGeotagIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomGeotagIntegrationTests.swift; sourceTree = "<group>"; };
+		F95AE567130B62D3F3BDA6D2 /* DepthSamplerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthSamplerTests.swift; sourceTree = "<group>"; };
 		FC58F5B210C7F575B3B660D5 /* ShelfPlacementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfPlacementTests.swift; sourceTree = "<group>"; };
 		FF250E3110C182BABE8A170F /* BookDetailCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,6 +155,8 @@
 				A979B4002363063261DFB873 /* LibrarySpaceTaskCard.swift */,
 				C2744F0AA2723487DA318AF5 /* LibraryTheme.swift */,
 				167FD518107DFEA43A8F5B59 /* NavigationArrowView.swift */,
+				1C37E3DD0F3913025836F158 /* RoomLocationSection.swift */,
+				C11DFB270DAE82539884F2A9 /* RoomScanGuideView.swift */,
 				7B675937DA4E30DFA6D4D901 /* ScannerView.swift */,
 			);
 			path = Views;
@@ -149,9 +173,12 @@
 				617886083E1E5DC79F003617 /* NavigationArrowRotation.swift */,
 				36AEE8763796833017B64FFC /* ReadingListStore.swift */,
 				D59B5BD069A66B4282A9496B /* RecommendationEngine.swift */,
+				A3180E6908E1D160FE75CA2F /* RoomLocationService.swift */,
+				3F12FAA854FF002FF5CC1B20 /* RoomScanGuidance.swift */,
 				C184A0CF6047AC9984720E8D /* ScanCandidateTracker.swift */,
 				42911B7271C6BCADFAC0325B /* ShelfGuidance.swift */,
 				1FB16BD2EA944D8D33B709E9 /* ShelfPlacement.swift */,
+				89ADAF0093538710698AECF3 /* ShelfPlacementStability.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -186,14 +213,19 @@
 				50F1889AF4177F096F6983A8 /* BookMatcherTests.swift */,
 				1208EF47EF7C47A02F2FA755 /* CatalogQueryTests.swift */,
 				754C8877B978430CBD991E6E /* CustomBookStoreTests.swift */,
+				F95AE567130B62D3F3BDA6D2 /* DepthSamplerTests.swift */,
 				6FC46D57276231EFE5D2E0C6 /* LibrarySpaceControllerTests.swift */,
 				B06C9DFB0635D5FE661EC913 /* LibrarySpaceTests.swift */,
 				8A3D991015B7847B66B22954 /* NavigationArrowRotationTests.swift */,
 				65A7BDF448F0352A7D9617D9 /* ReadingListStoreTests.swift */,
 				6877148BBC8CFFECC31A3F70 /* RecommendationEngineTests.swift */,
+				F83D9B7F6FB896C90DA4F31B /* RoomGeotagIntegrationTests.swift */,
+				CDBA5A7F52C63302A09C5112 /* RoomGeotagTests.swift */,
+				562772109A77BA49A4361492 /* RoomScanGuidanceTests.swift */,
 				5B7A839D45D4D60BE59625A1 /* ScanCandidateTrackerTests.swift */,
 				1DF84B0DB8B5F77208D3747C /* ScanTargetTests.swift */,
 				BF2D4F5345EFB99CB6A7E194 /* ShelfGuidanceTests.swift */,
+				03D26AA971FA7204D16DC853 /* ShelfPlacementStabilityTests.swift */,
 				FC58F5B210C7F575B3B660D5 /* ShelfPlacementTests.swift */,
 			);
 			path = ARSmartLibraryTests;
@@ -229,6 +261,7 @@
 			children = (
 				D176B89B2F365916695891E7 /* Book.swift */,
 				5FBDBC05FB064D1C1FA51656 /* LibrarySpace.swift */,
+				3F26037F49CB69ACB0E701B6 /* RoomGeotag.swift */,
 				994CAC1581198AEC723B5650 /* ScanTarget.swift */,
 			);
 			path = Models;
@@ -333,14 +366,19 @@
 				7DE6D4AE12DE989250CAA664 /* BookMatcherTests.swift in Sources */,
 				22E4AEE8DFB2B47C3C111348 /* CatalogQueryTests.swift in Sources */,
 				C329F148B0B6673C7A034818 /* CustomBookStoreTests.swift in Sources */,
+				94F3F9121BF8349CDEA399F1 /* DepthSamplerTests.swift in Sources */,
 				4CBA71077084CC52324D06A5 /* LibrarySpaceControllerTests.swift in Sources */,
 				9C8A2A1952A14AD06A21300E /* LibrarySpaceTests.swift in Sources */,
 				F63ACA21C4728FE10563F576 /* NavigationArrowRotationTests.swift in Sources */,
 				7251878C0BBE40DA7D601A40 /* ReadingListStoreTests.swift in Sources */,
 				AC59344E86751E3355F219E1 /* RecommendationEngineTests.swift in Sources */,
+				389174C9A574666DCBCA76E5 /* RoomGeotagIntegrationTests.swift in Sources */,
+				006E75BEC898845059F7016C /* RoomGeotagTests.swift in Sources */,
+				90FEB41E25D9FC55898C9FD5 /* RoomScanGuidanceTests.swift in Sources */,
 				2D5AF535B66A9D9C4DFB82D3 /* ScanCandidateTrackerTests.swift in Sources */,
 				FB2E7BA4A9148DC627119C2B /* ScanTargetTests.swift in Sources */,
 				215F487D8BE31B18A17EAEEE /* ShelfGuidanceTests.swift in Sources */,
+				F618F65AE920D32503FE1523 /* ShelfPlacementStabilityTests.swift in Sources */,
 				E61E1CE0EE8C0932E7599A17 /* ShelfPlacementTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,11 +410,17 @@
 				16DCD19D26A5E045C74A63D1 /* NavigationArrowView.swift in Sources */,
 				B0909FCBEEDF99AD51EE3B9E /* ReadingListStore.swift in Sources */,
 				A9410F70A105322694A7E107 /* RecommendationEngine.swift in Sources */,
+				05F2B97FA4BF32A1B7E69410 /* RoomGeotag.swift in Sources */,
+				EEAC2302F695E6E94A755728 /* RoomLocationSection.swift in Sources */,
+				95F2AB1B5DE16B820E195531 /* RoomLocationService.swift in Sources */,
+				F21903441290382BDFC6C379 /* RoomScanGuidance.swift in Sources */,
+				CED8AB8085BABB5BB6430EA3 /* RoomScanGuideView.swift in Sources */,
 				70D943AF8CCEB9817A391DA5 /* ScanCandidateTracker.swift in Sources */,
 				847076B638367057CA881ECE /* ScanTarget.swift in Sources */,
 				1DF9FA0EB7364B2D03A84D3D /* ScannerView.swift in Sources */,
 				7C564155EBF2169CD1F3218B /* ShelfGuidance.swift in Sources */,
 				82779628B9668E322D0CDC91 /* ShelfPlacement.swift in Sources */,
+				5ADB8CD25C8013F2BC965D7E /* ShelfPlacementStability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,7 +492,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -462,7 +506,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -565,7 +609,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -585,7 +629,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;

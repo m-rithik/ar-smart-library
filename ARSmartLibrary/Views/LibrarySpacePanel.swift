@@ -185,10 +185,7 @@ struct LibrarySpacePanel: View {
             }
         } else {
             Section("1. Map the room") {
-                Label(controller.isLocalized ? "Aligned with the library" : "Room alignment needed",
-                      systemImage: controller.isLocalized ? "checkmark.circle.fill" : "viewfinder")
-                    .foregroundStyle(controller.isLocalized ? Color.green : Color.orange)
-                Text(controller.mappingStatusText).font(.subheadline)
+                RoomScanGuideView(controller: controller)
                 Text(controller.message).font(.subheadline).foregroundStyle(.secondary)
                 if !controller.isLocalized, let data = controller.localizationImageData, let image = UIImage(data: data) {
                     Image(uiImage: image).resizable().scaledToFit().frame(maxHeight: 180)
@@ -203,6 +200,7 @@ struct LibrarySpacePanel: View {
                     Button("Continue placing shelf") { request(.close) }.disabled(!canUseAR)
                 }
             }
+            RoomLocationSection(controller: controller)
             Section("2. Shelf rows · \(controller.space?.shelves.count ?? 0)") {
                 if controller.space?.shelves.isEmpty == true {
                     Text("Add a shelf row to mark where readers should look.").foregroundStyle(.secondary)
@@ -336,7 +334,7 @@ struct LibrarySpacePanel: View {
             } else if controller.pendingShelf != nil {
                 Text("Finish or cancel the current shelf placement before saving.").font(.subheadline)
             } else if !controller.canSave {
-                Text("Return to the camera and scan the entrance, aisles and shelves until the room is mapped.").font(.subheadline)
+                Text(controller.mappingStatusText).font(.subheadline)
             }
             Text(controller.message).font(.subheadline).foregroundStyle(.secondary)
         } header: { Text("4. Save for readers") } footer: {

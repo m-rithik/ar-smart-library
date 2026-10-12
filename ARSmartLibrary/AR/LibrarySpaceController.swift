@@ -24,6 +24,14 @@ final class LibrarySpaceController: ObservableObject {
     @Published private(set) var shelfScreenPosition: CGPoint?
     @Published private(set) var pendingShelf: ShelfDraft?
     @Published private(set) var recordedStopCount = 0
+    @Published private(set) var roomScanGuidance = RoomScanGuidance.evaluate(
+        trackingState: .limited(.initializing), mappingStatus: .notAvailable,
+        originRecognized: false, allAnchorsAvailable: false, isNewSpace: true, shelfCount: 0
+    )
+    @Published private(set) var canPlaceShelf = false
+    @Published private(set) var shelfScanInstruction = "Record the entrance, then walk to the shelf."
+    @Published private(set) var shelfDistance: Float?
+    @Published private(set) var hasLiveDepth = false
 
     @Published private(set) var catalog: [Book]
     @Published private(set) var customBookError: String?
@@ -44,6 +52,10 @@ final class LibrarySpaceController: ObservableObject {
     private var waypointVisual: AnchorEntity?
     private var route: ShelfRouteProgress?
     private var draftStops: [LibraryWaypoint] = []
+    private var draftEntranceImageData: Data?
+    private var shelfStability = ShelfPlacementStability()
+    private var shelfPreview: AnchorEntity?
+    private var shelfPreviewUsesDepth = false
     private var localizationStartedAt: TimeInterval?
     private var saveID: UUID?
     private var minimumFrameTimestamp: TimeInterval = 0
@@ -123,6 +135,7 @@ final class LibrarySpaceController: ObservableObject {
         isAdmin = true
         hasUnsavedChanges = true
         localizationImageData = nil
+        resetRoomScanGuidance()
         cancelNavigation()
         cancelShelfPlacement()
         message = "Start at the entrance. Scan the room, then add a shelf and record aisle stops."
@@ -203,6 +216,8 @@ final class LibrarySpaceController: ObservableObject {
         pendingShelf = ShelfDraft(label: label, row: row, width: width, height: height, instructions: instructions)
         draftStops = []
         recordedStopCount = 0
+        draftEntranceImageData = nil
+        resetShelfPreview()
         message = "Record the entrance first, then stops along the aisle to this shelf."
         onWorkflowChanged?()
     }
@@ -223,7 +238,7 @@ final class LibrarySpaceController: ObservableObject {
                 return
             }
         }
-        if localizationImageData == nil { localizationImageData = imageData(from: frame) }
+        if draftStops.isEmpty { draftEntranceImageData = imageData(from: frame) }
         draftStops.append(LibraryWaypoint(worldTransform: transform))
         recordedStopCount = draftStops.count
         message = "Stop \(recordedStopCount) recorded. Add stops at aisle turns; then aim at the shelf row."
@@ -233,6 +248,11 @@ final class LibrarySpaceController: ObservableObject {
         guard !isSaving, !draftStops.isEmpty else { return }
         draftStops.removeLast()
         recordedStopCount = draftStops.count
+        if draftStops.isEmpty {
+            draftEntranceImageData = nil
+            resetShelfPreview()
+            message = "Entrance removed. Return to the entrance and record its view again."
+        }
     }
 
     func placeShelfAtReticle() {
@@ -246,33 +266,12 @@ final class LibrarySpaceController: ObservableObject {
             message = "Record at least the entrance stop before placing this shelf."
             return
         }
-        let center = CGPoint(x: arView.bounds.midX, y: arView.bounds.midY)
-        let imagePoint = CGPoint(x: 0.5, y: 0.5).applying(
-            frame.displayTransform(for: .portrait, viewportSize: arView.bounds.size).inverted()
-        )
-        let point: SIMD3<Float>?
-        let surfaceNormal: SIMD3<Float>?
-        if let hit = arView.raycast(from: center, allowing: .estimatedPlane, alignment: .vertical).first {
-            point = Self.position(hit.worldTransform)
-            // ARKit's plane coordinate system lies in XZ; +Y is its normal.
-            let surfaceTransform = (hit.anchor as? ARPlaneAnchor)?.transform ?? hit.worldTransform
-            surfaceNormal = SIMD3(surfaceTransform.columns.1.x, surfaceTransform.columns.1.y, surfaceTransform.columns.1.z)
-        } else {
-            point = DepthSampler.measurement(in: frame, at: imagePoint)?.position
-            surfaceNormal = nil
-        }
-        guard let point else {
-            message = "Aim at the center of the shelf row and slowly scan until its surface is detected."
+        updateShelfPreview(frame: frame)
+        guard canPlaceShelf, let transform = shelfStability.stableTransform else {
+            message = shelfScanInstruction
             return
         }
-        guard let transform = ShelfPlacement.transform(
-            at: point,
-            cameraPosition: Self.position(frame.camera.transform),
-            surfaceNormal: surfaceNormal
-        ) else {
-            message = "Step back and scan the front of the shelf until a vertical surface is detected."
-            return
-        }
+        let usedDepthOnly = shelfPreviewUsesDepth
         var shelf = LibraryShelf(
             label: draft.label, row: draft.row, instructions: draft.instructions,
             worldTransform: transform, width: draft.width, height: draft.height
@@ -286,8 +285,9 @@ final class LibrarySpaceController: ObservableObject {
             }
         }
         hasUnsavedChanges = true
+        if localizationImageData == nil { localizationImageData = draftEntranceImageData }
         cancelShelfPlacement()
-        let alignmentNote = surfaceNormal == nil
+        let alignmentNote = usedDepthOnly
             ? " The row faces the camera because its surface angle was unavailable. Check it from straight ahead; replace the row if needed."
             : ""
         message = "\(shelf.label), \(shelf.row) placed.\(alignmentNote) Open Library to assign books, then save the AR space."
@@ -297,6 +297,17 @@ final class LibrarySpaceController: ObservableObject {
         pendingShelf = nil
         draftStops = []
         recordedStopCount = 0
+        draftEntranceImageData = nil
+        resetShelfPreview()
+    }
+
+    func setRoomGeotag(_ geotag: RoomGeotag?, for spaceID: UUID) {
+        guard isAdmin, !isSaving, space?.id == spaceID else { return }
+        if let geotag, (try? geotag.validate()) == nil { return }
+        space?.roomGeotag = geotag
+        hasUnsavedChanges = true
+        message = geotag == nil ? "Room location removed. Save the space to keep this change."
+            : "Room location added on this iPhone. Save the space to keep it."
     }
 
     func assign(bookID: String, shelfID: UUID, slotLabel: String) {
@@ -424,6 +435,18 @@ final class LibrarySpaceController: ObservableObject {
         shelfScreenPosition = nil
         shelfVisuals.values.forEach { $0.isEnabled = false }
         waypointVisual?.isEnabled = false
+        hasLiveDepth = false
+        resetShelfPreview()
+        resetRoomScanGuidance()
+        mappingStatusText = "Scanning paused. Hold the phone steady and look around when the camera resumes."
+    }
+
+    private func resetRoomScanGuidance() {
+        roomScanGuidance = RoomScanGuidance.evaluate(
+            trackingState: .limited(.initializing), mappingStatus: .notAvailable,
+            originRecognized: false, allAnchorsAvailable: false,
+            isNewSpace: isNewCoordinateSpace || space == nil, shelfCount: space?.shelves.count ?? 0
+        )
     }
 
     func update(frame: ARFrame) {
@@ -431,11 +454,6 @@ final class LibrarySpaceController: ObservableObject {
         guard frame.timestamp > minimumFrameTimestamp else { return }
         let normal: Bool
         if case .normal = frame.camera.trackingState { normal = true } else { normal = false }
-        switch frame.worldMappingStatus {
-        case .mapped: mappingStatusText = "Room mapped"
-        case .extending: mappingStatusText = "Mapping more of the room"
-        default: mappingStatusText = "Move slowly and scan shelves and walls"
-        }
         if isNewCoordinateSpace, normal, !originWasAdded {
             arView?.session.add(anchor: ARAnchor(name: Self.originName(space.id), transform: matrix_identity_float4x4))
             originWasAdded = true
@@ -444,22 +462,115 @@ final class LibrarySpaceController: ObservableObject {
             if let name = anchor.name { result[name] = anchor.transform }
         }
         let ready = normal && resolvedAnchors[Self.originName(space.id)] != nil
+        let hasAnchors = Self.requiredAnchorNames(for: space).allSatisfy { resolvedAnchors[$0] != nil }
+        if !ready, localizationStartedAt == nil { localizationStartedAt = frame.timestamp }
+        let scanGuidance = RoomScanGuidance.evaluate(
+            trackingState: frame.camera.trackingState, mappingStatus: frame.worldMappingStatus,
+            originRecognized: ready, allAnchorsAvailable: hasAnchors,
+            isNewSpace: isNewCoordinateSpace, shelfCount: space.shelves.count,
+            relocalizationTimedOut: frame.timestamp - (localizationStartedAt ?? frame.timestamp) > 25
+        )
         guard ready else {
             suspendGuidance()
-            if localizationStartedAt == nil { localizationStartedAt = frame.timestamp }
-            if frame.timestamp - (localizationStartedAt ?? frame.timestamp) > 25 {
-                mappingStatusText = "Room not recognized. Return to the saved entrance view or reload the space."
-            }
+            roomScanGuidance = scanGuidance
+            mappingStatusText = scanGuidance.instruction
             return
         }
         isLocalized = true
+        roomScanGuidance = scanGuidance
+        mappingStatusText = scanGuidance.instruction
+        hasLiveDepth = frame.smoothedSceneDepth != nil || frame.sceneDepth != nil
         localizationStartedAt = nil
-        let hasAnchors = Self.requiredAnchorNames(for: space).allSatisfy { resolvedAnchors[$0] != nil }
         canSave = hasAnchors && pendingShelf == nil && (
             frame.worldMappingStatus == .mapped || frame.worldMappingStatus == .extending
         )
         renderShelves()
+        updateShelfPreview(frame: frame)
         updateNavigation(frame: frame)
+    }
+
+    private func resetShelfPreview() {
+        shelfStability.reset()
+        canPlaceShelf = false
+        shelfDistance = nil
+        shelfPreview?.removeFromParent()
+        shelfPreview = nil
+        shelfScanInstruction = "Aim at the shelf front and slowly scan across the row."
+    }
+
+    private func updateShelfPreview(frame: ARFrame) {
+        guard let draft = pendingShelf, isLocalized, let arView,
+              arView.bounds.width > 0, arView.bounds.height > 0,
+              ProcessInfo.processInfo.systemUptime - frame.timestamp < 0.4 else {
+            resetShelfPreview()
+            return
+        }
+        let cameraPosition = Self.position(frame.camera.transform)
+        let center = CGPoint(x: arView.bounds.midX, y: arView.bounds.midY)
+        let imagePoint = CGPoint(x: 0.5, y: 0.5).applying(
+            frame.displayTransform(for: .portrait, viewportSize: arView.bounds.size).inverted()
+        )
+        let depth = DepthSampler.measurement(in: frame, at: imagePoint)
+        var candidate: simd_float4x4?
+        var depthOnly = false
+        var hitHorizontalSurface = false
+        // Prefer measured plane geometry. An unrestricted estimated ray also hits LiDAR meshes.
+        for (target, alignment) in [
+            (ARRaycastQuery.Target.existingPlaneGeometry, ARRaycastQuery.TargetAlignment.vertical),
+            (.estimatedPlane, .any)
+        ] {
+            guard let hit = arView.raycast(from: center, allowing: target, alignment: alignment).first else { continue }
+            let point = Self.position(hit.worldTransform)
+            let normalTransform = (hit.anchor as? ARPlaneAnchor)?.transform ?? hit.worldTransform
+            let normal = SIMD3(normalTransform.columns.1.x, normalTransform.columns.1.y, normalTransform.columns.1.z)
+            guard let transform = ShelfPlacement.transform(at: point, cameraPosition: cameraPosition, surfaceNormal: normal) else {
+                hitHorizontalSurface = true
+                continue
+            }
+            // Avoid placing on a plane behind the frontmost surface measured by LiDAR.
+            if let depth, depth.quality == .high, simd_distance(depth.position, point) > 0.2 { continue }
+            candidate = transform
+            break
+        }
+        if candidate == nil, !hitHorizontalSurface, let depth, depth.quality == .high {
+            candidate = ShelfPlacement.transform(at: depth.position, cameraPosition: cameraPosition, surfaceNormal: nil)
+            depthOnly = true
+        }
+        guard let candidate else {
+            resetShelfPreview()
+            if hitHorizontalSurface {
+                shelfScanInstruction = "Aim at the upright shelf front, not the floor or the top of a shelf."
+            }
+            return
+        }
+        let distance = simd_distance(cameraPosition, Self.position(candidate))
+        guard (0.35...3).contains(distance) else {
+            resetShelfPreview()
+            shelfScanInstruction = distance < 0.35 ? "Step back a little so the whole row is visible."
+                : "Move closer to the shelf, within about 3 meters."
+            return
+        }
+        shelfDistance = distance
+        shelfPreviewUsesDepth = depthOnly
+        canPlaceShelf = shelfStability.observe(candidate, at: frame.timestamp, isDepthOnly: depthOnly)
+            && recordedStopCount > 0
+        let orientationNote = depthOnly ? " Face it straight-on; the row angle is estimated." : ""
+        shelfScanInstruction = canPlaceShelf
+            ? "Ready. Check that the outline matches the row, then place it.\(orientationNote)"
+            : "Hold the center of the row steady until the outline is ready.\(orientationNote)"
+        if shelfPreview == nil {
+            let preview = makeShelfOutline(width: draft.width, height: draft.height, color: .white)
+            arView.scene.addAnchor(preview)
+            shelfPreview = preview
+        }
+        shelfPreview?.transform = Transform(matrix: candidate)
+        if let shelfPreview {
+            for child in shelfPreview.children {
+                if let edge = child as? ModelEntity {
+                    edge.model?.materials = [UnlitMaterial(color: canPlaceShelf ? .systemCyan : .white)]
+                }
+            }
+        }
     }
 
     private func updateNavigation(frame: ARFrame) {
@@ -522,25 +633,30 @@ final class LibrarySpaceController: ObservableObject {
             }
             let visual: AnchorEntity
             if let existing = shelfVisuals[shelf.id] { visual = existing } else {
-                visual = AnchorEntity(world: matrix_identity_float4x4)
-                let material = UnlitMaterial(color: .systemCyan)
-                let thickness: Float = 0.015
-                for y in [-shelf.height / 2, shelf.height / 2] {
-                    let edge = ModelEntity(mesh: .generateBox(size: [shelf.width, thickness, thickness]), materials: [material])
-                    edge.position = [0, y, 0.025]
-                    visual.addChild(edge)
-                }
-                for x in [-shelf.width / 2, shelf.width / 2] {
-                    let edge = ModelEntity(mesh: .generateBox(size: [thickness, shelf.height, thickness]), materials: [material])
-                    edge.position = [x, 0, 0.025]
-                    visual.addChild(edge)
-                }
+                visual = makeShelfOutline(width: shelf.width, height: shelf.height, color: .systemCyan)
                 arView.scene.addAnchor(visual)
                 shelfVisuals[shelf.id] = visual
             }
             visual.transform = Transform(matrix: transform)
             visual.isEnabled = isLocalized
         }
+    }
+
+    private func makeShelfOutline(width: Float, height: Float, color: UIColor) -> AnchorEntity {
+        let visual = AnchorEntity(world: matrix_identity_float4x4)
+        let material = UnlitMaterial(color: color)
+        let thickness: Float = 0.015
+        for y in [-height / 2, height / 2] {
+            let edge = ModelEntity(mesh: .generateBox(size: [width, thickness, thickness]), materials: [material])
+            edge.position = [0, y, 0.025]
+            visual.addChild(edge)
+        }
+        for x in [-width / 2, width / 2] {
+            let edge = ModelEntity(mesh: .generateBox(size: [thickness, height, thickness]), materials: [material])
+            edge.position = [x, 0, 0.025]
+            visual.addChild(edge)
+        }
+        return visual
     }
 
     private func updateWaypointVisual(at point: SIMD3<Float>, visible: Bool) {

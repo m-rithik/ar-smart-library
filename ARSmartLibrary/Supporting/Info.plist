@@ -22,6 +22,8 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>NSCameraUsageDescription</key>
 	<string>AR Smart Library uses the camera and LiDAR sensor to recognize books and anchor information beside them.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Add an optional location tag to your library room. It stays on this iPhone and is not used to position shelves.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

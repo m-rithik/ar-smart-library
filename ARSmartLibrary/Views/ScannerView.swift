@@ -130,7 +130,7 @@ private struct ScannerScene: View {
                     ScrollView {
                         VStack(spacing: 12) {
                             if dynamicTypeSize.isAccessibilitySize, controller.canUseAR {
-                                Text(controller.statusMessage)
+                                Text(scannerStatus)
                                     .font(.subheadline)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .padding(14)
@@ -168,7 +168,9 @@ private struct ScannerScene: View {
                             .tracking(1.4)
                             .foregroundStyle(LibraryTheme.textMuted)
                     }
-                    Text(dynamicTypeSize.isAccessibilitySize ? "Scanner" : "Shelf scanner")
+                    Text(spaceController.isAdmin ? (spaceController.pendingShelf == nil ? "Room scan" : "Shelf placement")
+                         : spaceController.targetBook != nil ? "Book directions"
+                         : dynamicTypeSize.isAccessibilitySize ? "Scanner" : "Shelf scanner")
                         .font(.headline.weight(.semibold))
                         .fixedSize(horizontal: false, vertical: true)
                 }
@@ -196,11 +198,11 @@ private struct ScannerScene: View {
                     .fill(.white.opacity(0.08))
                     .frame(height: 1)
     
-                Label("Local catalog · works offline", systemImage: "internaldrive")
+                Label(spaceController.isBusyWithSpace ? "Camera + motion · works offline" : "Local catalog · works offline", systemImage: "internaldrive")
                     .font(.caption.weight(.medium))
                     .foregroundStyle(LibraryTheme.accent)
                 if controller.canUseAR {
-                    Text(controller.statusMessage)
+                    Text(scannerStatus)
                         .font(.caption)
                         .foregroundStyle(LibraryTheme.textMuted)
                         .fixedSize(horizontal: false, vertical: true)
@@ -218,6 +220,17 @@ private struct ScannerScene: View {
         // Keep the center reticle and the next waypoint visible during spatial tasks.
         if controller.canUseAR, controller.selectedBook == nil { return 0.40 }
         return dynamicTypeSize.isAccessibilitySize ? 0.65 : 0.54
+    }
+
+    private var scannerStatus: String {
+        guard controller.canUseAR, spaceController.isBusyWithSpace else { return controller.statusMessage }
+        if spaceController.space == nil { return "Create a library space to start mapping" }
+        if !spaceController.isLocalized { return spaceController.roomScanGuidance.title }
+        if spaceController.pendingShelf != nil {
+            return spaceController.recordedStopCount == 0 ? "Start by recording the entrance view"
+                : spaceController.canPlaceShelf ? "Shelf outline ready" : "Scan the shelf front, then hold steady"
+        }
+        return spaceController.isAdmin ? spaceController.roomScanGuidance.title : spaceController.routeStep
     }
 
     @ViewBuilder
@@ -425,7 +438,9 @@ private struct ScannerScene: View {
                 .stroke(.white.opacity(0.18), lineWidth: 1)
 
             ScannerReticleCorners()
-                .stroke(LibraryTheme.accent, style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
+                .stroke(spaceController.pendingShelf == nil ? LibraryTheme.accent
+                        : spaceController.canPlaceShelf ? .cyan : .white,
+                        style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
 
             Circle()
                 .stroke(.white.opacity(0.9), lineWidth: 1.5)
@@ -433,7 +448,7 @@ private struct ScannerScene: View {
 
             VStack {
                 Spacer()
-                Text(spaceController.pendingShelf == nil ? "BOOK TITLE" : "SHELF CENTER")
+                Text(spaceController.pendingShelf == nil ? "BOOK TITLE" : spaceController.canPlaceShelf ? "READY TO PLACE" : "SHELF CENTER")
                     .font(.system(size: 9, weight: .bold, design: .rounded))
                     .tracking(2)
                     .padding(.horizontal, 10)

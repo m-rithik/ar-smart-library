@@ -127,6 +127,9 @@ final class LibrarySpaceControllerTests: XCTestCase {
         XCTAssertFalse(controller.canSave)
         XCTAssertNil(controller.guidance)
         XCTAssertNil(controller.shelfScreenPosition)
+        XCTAssertFalse(controller.canPlaceShelf)
+        XCTAssertNil(controller.shelfDistance)
+        XCTAssertFalse(controller.hasLiveDepth)
     }
 
     @MainActor

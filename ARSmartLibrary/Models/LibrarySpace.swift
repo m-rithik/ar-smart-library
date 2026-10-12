@@ -138,20 +138,24 @@ struct LibrarySpace: Codable, Equatable, Identifiable {
     var name: String
     var shelves: [LibraryShelf]
     var bookLocations: [BookShelfLocation]
+    var roomGeotag: RoomGeotag?
 
     init(
         id: UUID = UUID(),
         name: String,
         shelves: [LibraryShelf] = [],
-        bookLocations: [BookShelfLocation] = []
+        bookLocations: [BookShelfLocation] = [],
+        roomGeotag: RoomGeotag? = nil
     ) {
         self.id = id
         self.name = name
         self.shelves = shelves
         self.bookLocations = bookLocations
+        self.roomGeotag = roomGeotag
     }
 
     func validate(catalogBookIDs: Set<String>? = nil) throws {
+        try roomGeotag?.validate()
         guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             throw LibrarySpaceError.missingSpaceName
         }

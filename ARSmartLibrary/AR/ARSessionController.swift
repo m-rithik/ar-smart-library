@@ -298,6 +298,8 @@ final class ARSessionController: NSObject, ObservableObject, @unchecked Sendable
         }
 
         let configuration = ARWorldTrackingConfiguration()
+        // ARKit fuses camera, gyroscope and accelerometer data in this local room frame.
+        configuration.worldAlignment = .gravity
         configuration.planeDetection = [.horizontal, .vertical]
         configuration.environmentTexturing = .automatic
 

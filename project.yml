@@ -14,8 +14,8 @@ settings:
     TARGETED_DEVICE_FAMILY: "1"
     CODE_SIGN_STYLE: Automatic
     DEVELOPMENT_TEAM: ""
-    CURRENT_PROJECT_VERSION: "3"
-    MARKETING_VERSION: "1.2"
+    CURRENT_PROJECT_VERSION: "4"
+    MARKETING_VERSION: "1.3"
 
 targets:
   ARSmartLibrary:
@@ -35,6 +35,7 @@ targets:
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         NSCameraUsageDescription: AR Smart Library uses the camera and LiDAR sensor to recognize books and anchor information beside them.
+        NSLocationWhenInUseUsageDescription: Add an optional location tag to your library room. It stays on this iPhone and is not used to position shelves.
         UIApplicationSceneManifest:
           UIApplicationSupportsMultipleScenes: false
         UILaunchScreen: {}
