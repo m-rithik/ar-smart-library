@@ -21,6 +21,24 @@ final class LibrarySpaceTests: XCTestCase {
         }
     }
 
+    func testCatalogUpdateAllowsCustomAssignmentsToSaveAndReload() throws {
+        let custom = try CustomBookStore.makeBook(
+            title: "Celestial Orchards", author: "Mira Sen", genre: "Fiction",
+            summary: "", keywords: "", rating: 0, existingBooks: []
+        )
+        let shelf = makeShelf()
+        var space = LibrarySpace(name: "Library", shelves: [shelf])
+        try space.assign(bookID: custom.id, shelfID: shelf.id, slotLabel: "Left")
+        XCTAssertThrowsError(try store.save(space: space, worldMapData: Data([1])))
+
+        store.updateCatalogBookIDs(["book-one", "book-two", custom.id])
+        try store.save(space: space, worldMapData: Data([1]))
+
+        XCTAssertEqual(try store.load()?.space.placement(for: custom.id)?.location.slotLabel, "Left")
+        try space.assign(bookID: "still-missing", shelfID: shelf.id, slotLabel: "Right")
+        XCTAssertThrowsError(try store.save(space: space, worldMapData: Data([1])))
+    }
+
     func testRoundTripPreservesMapAndActualShelfTransform() throws {
         var transform = matrix_identity_float4x4
         transform.columns.3 = SIMD4(2.5, 1.2, -4, 1)

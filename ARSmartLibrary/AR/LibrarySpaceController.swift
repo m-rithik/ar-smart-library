@@ -25,12 +25,16 @@ final class LibrarySpaceController: ObservableObject {
     @Published private(set) var pendingShelf: ShelfDraft?
     @Published private(set) var recordedStopCount = 0
 
-    let catalog: [Book]
+    @Published private(set) var catalog: [Book]
+    @Published private(set) var customBookError: String?
     var restartSession: (() -> Void)?
     var onWorkflowChanged: (() -> Void)?
+    var onCatalogChanged: (([Book]) -> Void)?
 
     private weak var arView: ARView?
-    private let store: LibrarySpaceStore
+    private var store: LibrarySpaceStore
+    private let customBookStore: CustomBookStore?
+    private var customBooks: [Book] = []
     private var initialMap: ARWorldMap?
     private var isNewCoordinateSpace = false
     private var originWasAdded = false
@@ -52,10 +56,39 @@ final class LibrarySpaceController: ObservableObject {
         return space?.placement(for: targetBook.id)
     }
 
-    init(catalog: [Book], store: LibrarySpaceStore? = nil) {
+    init(catalog: [Book], store: LibrarySpaceStore? = nil, customBookStore: CustomBookStore? = nil) {
         self.catalog = catalog
-        self.store = store ?? LibrarySpaceStore(catalogBookIDs: Set(catalog.map(\.id)))
+        self.store = store ?? LibrarySpaceStore()
+        self.customBookStore = customBookStore
+        if let customBookStore {
+            do {
+                customBooks = try customBookStore.load()
+                self.catalog.append(contentsOf: customBooks)
+            } catch {
+                customBookError = "Could not open your saved books. Adding books is disabled to protect the saved file."
+            }
+        }
+        self.store.updateCatalogBookIDs(Set(self.catalog.map(\.id)))
         loadSavedData()
+    }
+
+    @discardableResult
+    func addCustomBook(
+        title: String, author: String, genre: String, summary: String, keywords: String, rating: Double
+    ) throws -> Book {
+        guard customBookError == nil else { throw CustomBookError.loadFailed }
+        guard let customBookStore else { throw CustomBookError.storageUnavailable }
+        let book = try CustomBookStore.makeBook(
+            title: title, author: author, genre: genre, summary: summary,
+            keywords: keywords, rating: rating, existingBooks: catalog
+        )
+        let updatedCustomBooks = customBooks + [book]
+        try customBookStore.save(updatedCustomBooks)
+        customBooks = updatedCustomBooks
+        catalog.append(book)
+        store.updateCatalogBookIDs(Set(catalog.map(\.id)))
+        onCatalogChanged?(catalog)
+        return book
     }
 
     func attach(to view: ARView) { arView = view }

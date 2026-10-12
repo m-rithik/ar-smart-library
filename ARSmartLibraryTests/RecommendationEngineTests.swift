@@ -95,6 +95,33 @@ final class RecommendationEngineTests: XCTestCase {
         XCTAssertTrue(recommendations.isEmpty)
     }
 
+    func testHighlyRatedReasonDoesNotInventARatingForAnUnratedBook() throws {
+        let seed = makeBook(
+            id: "seed",
+            title: "Astronomy Guide",
+            genre: "Science",
+            rating: 4,
+            keywords: ["space"]
+        )
+        let unrated = makeBook(
+            id: "custom-unrated",
+            title: "Exploring the Universe",
+            genre: "Science",
+            rating: 0,
+            keywords: ["space"]
+        )
+
+        let recommendations = RecommendationEngine().recommendations(
+            for: seed,
+            from: [seed, unrated],
+            intent: .highlyRated
+        )
+        let recommendation = try XCTUnwrap(recommendations.first)
+
+        XCTAssertEqual(recommendation.book.id, unrated.id)
+        XCTAssertEqual(recommendation.reason, "Linked by space, with no rating added.")
+    }
+
     func testExploreIntentIntroducesAGenreBridge() {
         let seed = makeBook(
             id: "seed",

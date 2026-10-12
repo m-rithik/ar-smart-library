@@ -26,6 +26,8 @@ struct LibrarySpacePanel: View {
     @State private var pendingAction: PanelAction?
     @State private var shelfToRemove: LibraryShelf?
     @State private var bookToRemove: Book?
+    @State private var showsAddBook = false
+    @State private var navigationPath: [Book] = []
 
     init(controller: LibrarySpaceController, canUseAR: Bool = true,
          arUnavailableReason: String? = nil, isRoot: Bool = false,
@@ -39,7 +41,7 @@ struct LibrarySpacePanel: View {
     }
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigationPath) {
             ScrollViewReader { proxy in
                 Group {
                     if controller.isAdmin {
@@ -60,6 +62,10 @@ struct LibrarySpacePanel: View {
             .navigationTitle(controller.isAdmin ? "Library setup" : "Library")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Add book") { showsAddBook = true }
+                        .disabled(controller.isSaving)
+                }
                 if !controller.isAdmin {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button { request(.mode(true)) } label: {
@@ -77,6 +83,22 @@ struct LibrarySpacePanel: View {
             .navigationDestination(for: Book.self) { book in
                 CatalogBookDetailView(book: book, controller: controller, canUseAR: canUseAR,
                                       arUnavailableReason: arUnavailableReason, onFind: findBook)
+            }
+            .sheet(isPresented: $showsAddBook) {
+                CustomBookForm(controller: controller) { book in
+                    showsAddBook = false
+                    navigationPath.append(book)
+                }
+            }
+            .safeAreaInset(edge: .bottom) {
+                if let error = controller.customBookError {
+                    Text(error)
+                        .font(.caption)
+                        .foregroundStyle(.orange)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(LibraryTheme.surface)
+                }
             }
             .interactiveDismissDisabled(hasFormEdits)
             .alert(pendingAction?.title ?? "Discard changes?", isPresented: Binding(

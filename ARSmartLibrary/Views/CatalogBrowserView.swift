@@ -301,17 +301,17 @@ struct CatalogBrowserView: View {
             HStack {
                 Text(book.genre).lineLimit(1)
                 Spacer(minLength: 4)
-                Label(book.rating.formatted(.number.precision(.fractionLength(1))), systemImage: "star.fill")
+                Label(book.ratingText, systemImage: "star.fill")
             }
             VStack(alignment: .leading, spacing: 3) {
                 Text(book.genre)
-                Label(book.rating.formatted(.number.precision(.fractionLength(1))), systemImage: "star.fill")
+                Label(book.ratingText, systemImage: "star.fill")
             }
         }
         .font(.caption2)
         .foregroundStyle(LibraryTheme.textMuted)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("\(book.genre), demo rating \(book.rating.formatted()) out of 5")
+        .accessibilityLabel("\(book.genre), \(book.ratingDescription)")
     }
 
     private var emptyState: some View {
@@ -354,7 +354,7 @@ struct CatalogBrowserView: View {
         VStack(spacing: 7) {
             Label("A whole library. Entirely on your device.", systemImage: "iphone")
                 .font(.caption.weight(.medium))
-            Text("Demo catalog ratings · Original catalog artwork")
+            Text("Demo books and your own collection · Original catalog artwork")
                 .font(.caption2)
             if !canUseAR {
                 Text("Scan books and follow shelf directions on an AR-capable iPhone.")

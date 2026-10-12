@@ -159,6 +159,11 @@ struct RecommendationEngine {
                 ? "A less obvious \(candidate.book.genre.lowercased()) pick."
                 : "A less obvious pick linked by \(themes)."
         case .highlyRated:
+            if candidate.book.rating <= 0 {
+                return themes.isEmpty
+                    ? "A related pick with no rating added."
+                    : "Linked by \(themes), with no rating added."
+            }
             if !themes.isEmpty {
                 return "Rated \(candidate.book.rating.formatted(.number.precision(.fractionLength(1)))) and linked by \(themes)."
             }

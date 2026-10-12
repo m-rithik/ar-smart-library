@@ -18,6 +18,74 @@ final class LibrarySpaceControllerTests: XCTestCase {
     }
 
     @MainActor
+    func testAddingCustomBookPersistsBeforePublishingAndPreservesShelfDraft() throws {
+        let customStore = CustomBookStore(url: directory.appendingPathComponent("custom-books.json"))
+        let controller = LibrarySpaceController(catalog: [], store: store, customBookStore: customStore)
+        controller.beginNewSpace(name: "Working library")
+        beginShelfDraft(on: controller)
+        let originalSpace = controller.space
+        let originalDraftLabel = controller.pendingShelf?.label
+        var restartCount = 0
+        controller.restartSession = { restartCount += 1 }
+        var publishedBooks: [Book] = []
+        controller.onCatalogChanged = { books in
+            publishedBooks = books
+            XCTAssertEqual(try? customStore.load(), books)
+        }
+
+        let book = try controller.addCustomBook(
+            title: "Celestial Orchards", author: "Mira Sen", genre: "Fiction",
+            summary: "A journey among the stars.", keywords: "space, gardens", rating: 0
+        )
+
+        XCTAssertEqual(controller.catalog, [book])
+        XCTAssertEqual(publishedBooks, [book])
+        XCTAssertEqual(controller.space, originalSpace)
+        XCTAssertEqual(controller.pendingShelf?.label, originalDraftLabel)
+        XCTAssertTrue(controller.isAdmin)
+        XCTAssertEqual(restartCount, 0)
+        let reloaded = LibrarySpaceController(catalog: [], store: store, customBookStore: customStore)
+        XCTAssertEqual(reloaded.catalog, [book])
+        XCTAssertNil(reloaded.customBookError)
+    }
+
+    @MainActor
+    func testCorruptCustomCatalogCannotBeOverwrittenByAddingBook() throws {
+        let customStore = CustomBookStore(url: directory.appendingPathComponent("custom-books.json"))
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        let corruptData = Data("not a custom catalog".utf8)
+        try corruptData.write(to: customStore.url)
+        let controller = LibrarySpaceController(catalog: [], store: store, customBookStore: customStore)
+
+        XCTAssertNotNil(controller.customBookError)
+        XCTAssertThrowsError(try controller.addCustomBook(
+            title: "Celestial Orchards", author: "Mira Sen", genre: "Fiction",
+            summary: "", keywords: "", rating: 0
+        )) { XCTAssertEqual($0 as? CustomBookError, .loadFailed) }
+
+        XCTAssertTrue(controller.catalog.isEmpty)
+        XCTAssertEqual(try Data(contentsOf: customStore.url), corruptData)
+    }
+
+    @MainActor
+    func testFailedCustomBookSaveDoesNotPublishOrChangeCatalog() throws {
+        let customStore = CustomBookStore(url: directory.appendingPathComponent("custom-books.json"))
+        let controller = LibrarySpaceController(catalog: [], store: store, customBookStore: customStore)
+        // Make the destination a directory after the initial empty load.
+        try FileManager.default.createDirectory(at: customStore.url, withIntermediateDirectories: true)
+        var changes = 0
+        controller.onCatalogChanged = { _ in changes += 1 }
+
+        XCTAssertThrowsError(try controller.addCustomBook(
+            title: "Celestial Orchards", author: "Mira Sen", genre: "Fiction",
+            summary: "", keywords: "", rating: 0
+        ))
+
+        XCTAssertTrue(controller.catalog.isEmpty)
+        XCTAssertEqual(changes, 0)
+    }
+
+    @MainActor
     func testNewSpaceStartsUnsavedAdminWorkflowAndRequestsSessionRestart() throws {
         let controller = LibrarySpaceController(catalog: [], store: store)
         var restartCount = 0

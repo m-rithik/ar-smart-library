@@ -9,6 +9,12 @@ struct Book: Codable, Hashable, Identifiable {
     let rating: Double
     let summary: String
     let keywords: [String]
+
+    var isCustom: Bool { id.hasPrefix("custom-") }
+    var ratingText: String { rating > 0 ? rating.formatted(.number.precision(.fractionLength(1))) : "Not rated" }
+    var ratingDescription: String {
+        rating > 0 ? "\(ratingText) / 5 · \(isCustom ? "your rating" : "demo rating")" : "Not rated"
+    }
 }
 
 struct BookMatch: Equatable {

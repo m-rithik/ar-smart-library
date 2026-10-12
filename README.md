@@ -62,7 +62,7 @@ The signed IPA is a local build artifact and is not committed to Git. Package on
 8. Tap **Scan another** or **Start over** to reset the local track.
 9. Use the layers button to inspect the LiDAR reconstruction mesh.
 
-The included catalog contains twelve demonstration titles in `ARSmartLibrary/Resources/BookCatalog.json`. Add books there using the existing JSON fields. Recognition only identifies titles present in that catalog.
+The included catalog contains twelve demonstration titles in `ARSmartLibrary/Resources/BookCatalog.json`. Add your own titles using **Add book** in the app. Recognition matches the bundled catalog and your saved custom books.
 
 ## Browse and save your next read
 
@@ -76,6 +76,14 @@ Open **Library** from the scanner. Simulator and devices without AR open directl
 - Large accessibility text switches the collection to a vertical list.
 
 The sliders button opens **Library setup**. Choose **Reader** there to return to browsing.
+
+## Add your own books
+
+1. Open **Library** or **Library setup** and tap **Add book** at the top left.
+2. Enter the title as printed on the cover or spine, and the author. Optionally add a genre, description, comma-separated keywords, and your rating.
+3. Tap **Save**. The book's details open, and it is immediately available in search, scanning, recommendations, reading lists, and the shelf assignment picker.
+
+Custom books are stored locally and survive app restarts and app updates. Adding one does not require a mapped room or discard a room or shelf draft. Duplicate title/author pairs are rejected. Omitted ratings appear as **Not rated**; entered ratings are labeled **your rating**. The app does not fetch book information or cover photos online. Uninstalling the app removes its local books and library data.
 
 ## Set up the AR library as an admin
 
@@ -163,7 +171,7 @@ Build output is kept outside the project folder to avoid Finder metadata signing
 
 ARKit scene depth and LiDAR must be tested on the physical iPhone; Simulator only verifies the build and non-hardware logic.
 
-Validated on October 11, 2026 with Xcode 16.2 and the iPhone 16 Pro Simulator running iOS 18.3: all 88 automated tests passed, and the unsigned Release build for iPhone succeeded. Catalog search, book details, reading-status updates, and persistence across app relaunch were also checked in Simulator. Physical-device acceptance below remains required before claiming real-room accuracy.
+Validated on October 12, 2026 with Xcode 16.2 and the iPhone 16 Pro Simulator running iOS 18.3: all 104 automated tests passed. Custom-book creation, search, persistence across app relaunch, duplicate warnings, and cancellation with unsaved details were checked in Simulator. Catalog details and reading-status persistence were also checked in the previous build. Physical-device acceptance below remains required before claiming real-room accuracy.
 
 ### Physical-device acceptance checks
 

@@ -16,13 +16,17 @@ struct SavedLibrarySpace: Codable, Equatable {
 
 struct LibrarySpaceStore {
     let url: URL
-    private let catalogBookIDs: Set<String>?
+    private var catalogBookIDs: Set<String>?
 
     init(url: URL? = nil, catalogBookIDs: Set<String>? = nil) {
         self.url = url ?? URL.applicationSupportDirectory
             .appendingPathComponent("ARSmartLibrary", isDirectory: true)
             .appendingPathComponent("library-space.json")
         self.catalogBookIDs = catalogBookIDs
+    }
+
+    mutating func updateCatalogBookIDs(_ ids: Set<String>) {
+        catalogBookIDs = ids
     }
 
     func load() throws -> SavedLibrarySpace? {

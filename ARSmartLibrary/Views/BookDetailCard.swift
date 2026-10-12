@@ -39,7 +39,7 @@ struct BookDetailCard: View {
                     Text(book.genre)
                         .font(.caption.weight(.medium))
                         .foregroundStyle(LibraryTheme.accent)
-                    Label("\(book.rating.formatted(.number.precision(.fractionLength(1)))) / 5 · demo rating", systemImage: "star.fill")
+                    Label(book.ratingDescription, systemImage: "star.fill")
                         .font(.caption)
                         .foregroundStyle(LibraryTheme.textMuted)
                 }
@@ -58,19 +58,21 @@ struct BookDetailCard: View {
             ReadingStatusMenu(book: book)
 
             VStack(alignment: .leading, spacing: 4) {
-                Text(book.summary)
+                Text(book.summary.isEmpty ? "No description added." : book.summary)
                     .font(.subheadline)
                     .lineSpacing(3)
                     .lineLimit(showsFullSummary ? nil : 3)
                     .fixedSize(horizontal: false, vertical: true)
-                Button {
-                    withAnimation(.easeInOut(duration: 0.2)) { showsFullSummary.toggle() }
-                } label: {
-                    Label(showsFullSummary ? "Show less" : "Read full summary", systemImage: showsFullSummary ? "chevron.up" : "chevron.down")
-                        .font(.caption.weight(.semibold))
-                        .frame(minHeight: 44)
+                if !book.summary.isEmpty {
+                    Button {
+                        withAnimation(.easeInOut(duration: 0.2)) { showsFullSummary.toggle() }
+                    } label: {
+                        Label(showsFullSummary ? "Show less" : "Read full summary", systemImage: showsFullSummary ? "chevron.up" : "chevron.down")
+                            .font(.caption.weight(.semibold))
+                            .frame(minHeight: 44)
+                    }
+                    .accessibilityValue(showsFullSummary ? "Expanded" : "Collapsed")
                 }
-                .accessibilityValue(showsFullSummary ? "Expanded" : "Collapsed")
             }
 
             Divider()
@@ -147,7 +149,7 @@ struct BookDetailCard: View {
                     }
                 }
             }
-            Text("Suggestions use catalog themes and descriptions. Ratings are demo data.")
+            Text("Suggestions use catalog themes and descriptions. Ratings come from demo data or your own entries.")
                 .font(.caption2)
                 .foregroundStyle(LibraryTheme.textMuted)
         }
@@ -254,7 +256,7 @@ struct BookComparisonCard: View {
             .padding(16)
             .background(LibraryTheme.elevated, in: RoundedRectangle(cornerRadius: 18))
 
-            Text("Similarity is based on catalog content. Ratings are demo data, not live reviews.")
+            Text("Similarity is based on catalog content. Ratings come from demo data or your own entries, not live reviews.")
                 .font(.caption2)
                 .foregroundStyle(LibraryTheme.textMuted)
 
@@ -291,7 +293,7 @@ struct BookComparisonCard: View {
             Text(book.genre)
                 .font(.caption)
                 .foregroundStyle(LibraryTheme.accent)
-            Label("\(book.rating.formatted(.number.precision(.fractionLength(1)))) · demo rating", systemImage: "star.fill")
+            Label(book.ratingDescription, systemImage: "star.fill")
                 .font(.caption2.weight(.semibold))
                 .foregroundStyle(LibraryTheme.textMuted)
             ReadingStatusMenu(book: book)

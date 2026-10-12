@@ -25,9 +25,9 @@ final class ARSessionController: NSObject, ObservableObject, @unchecked Sendable
     var canUseAR: Bool { isARSupported && !permissionDenied && sessionFailureMessage == nil }
 
     private weak var arView: ARView?
-    private let catalog: [Book]
-    private let matcher: BookMatcher
-    private let visionCustomWords: [String]
+    @MainActor private var catalog: [Book]
+    @MainActor private(set) var matcher: BookMatcher
+    private var visionCustomWords: [String]
     private let recommendationEngine = RecommendationEngine()
     private let sessionQueue = DispatchQueue(label: "com.rithikmeedinti.ARSmartLibrary.session")
     private let visionQueue = DispatchQueue(label: "com.rithikmeedinti.ARSmartLibrary.vision", qos: .userInitiated)
@@ -48,15 +48,23 @@ final class ARSessionController: NSObject, ObservableObject, @unchecked Sendable
     private var lastTrackingFrameTimestamp: TimeInterval = 0
 
     @MainActor
-    override init() {
-        let loadedCatalog = BookCatalog.load()
+    override convenience init() {
+        self.init(customBookStore: CustomBookStore())
+    }
+
+    @MainActor
+    init(customBookStore: CustomBookStore?, spaceStore: LibrarySpaceStore? = nil) {
+        librarySpace = LibrarySpaceController(
+            catalog: BookCatalog.load(), store: spaceStore, customBookStore: customBookStore
+        )
+        let loadedCatalog = librarySpace.catalog
         catalog = loadedCatalog
         matcher = BookMatcher(books: loadedCatalog)
         visionCustomWords = loadedCatalog.flatMap { [$0.title, $0.author] }
-        librarySpace = LibrarySpaceController(catalog: loadedCatalog)
         super.init()
 
         librarySpace.restartSession = { [weak self] in self?.restartARSpace() }
+        librarySpace.onCatalogChanged = { [weak self] in self?.updateCatalog($0) }
         librarySpace.onWorkflowChanged = { [weak self] in
             guard let self else { return }
             self.clearSelection()
@@ -66,6 +74,21 @@ final class ARSessionController: NSObject, ObservableObject, @unchecked Sendable
 
         if loadedCatalog.isEmpty {
             statusMessage = "Book catalog could not be loaded"
+        }
+    }
+
+    @MainActor
+    private func updateCatalog(_ books: [Book]) {
+        catalog = books
+        matcher = BookMatcher(books: books)
+        candidateTracker.reset()
+        minimumFrameTimestamp = max(minimumFrameTimestamp, arView?.session.currentFrame?.timestamp ?? 0, lastTrackingFrameTimestamp)
+        let words = books.flatMap { [$0.title, $0.author] }
+        sessionQueue.async { [weak self] in self?.visionCustomWords = words }
+        if let selectedBook {
+            recommendations = recommendationEngine.recommendations(
+                for: selectedBook, from: books, intent: recommendationIntent
+            )
         }
     }
 
@@ -540,13 +563,14 @@ final class ARSessionController: NSObject, ObservableObject, @unchecked Sendable
     private func recognizeText(
         in frame: ARFrame,
         regionOfInterest: CGRect,
-        session: ARSession
+        session: ARSession,
+        customWords: [String]
     ) {
         let request = VNRecognizeTextRequest()
         request.recognitionLevel = .accurate
         request.usesLanguageCorrection = true
         request.recognitionLanguages = ["en-US"]
-        request.customWords = visionCustomWords
+        request.customWords = customWords
         request.minimumTextHeight = 0.018
         request.regionOfInterest = regionOfInterest
 
@@ -611,12 +635,14 @@ extension ARSessionController: ARSessionDelegate {
         visionInFlight = true
         lastVisionTimestamp = frame.timestamp
         let sourceFrame = frame
+        let customWords = visionCustomWords
 
         visionQueue.async { [weak self] in
             self?.recognizeText(
                 in: sourceFrame,
                 regionOfInterest: geometry.visionRegion,
-                session: session
+                session: session,
+                customWords: customWords
             )
             self?.sessionQueue.async { [weak self] in
                 self?.visionInFlight = false

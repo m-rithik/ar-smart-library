@@ -82,7 +82,7 @@ struct CatalogBookDetailView: View {
     }
 
     private var ratingLabel: some View {
-        Label("\(book.rating.formatted(.number.precision(.fractionLength(1)))) / 5 · demo rating", systemImage: "star.fill")
+        Label(book.ratingDescription, systemImage: "star.fill")
     }
 
     private var placementLabel: some View {
@@ -92,7 +92,7 @@ struct CatalogBookDetailView: View {
     private var aboutSection: some View {
         VStack(alignment: .leading, spacing: 16) {
             sectionHeading("Between the covers", subtitle: "About this book")
-            Text(book.summary)
+            Text(book.summary.isEmpty ? "No description added." : book.summary)
                 .font(.body)
                 .lineSpacing(5)
                 .fixedSize(horizontal: false, vertical: true)
@@ -117,7 +117,7 @@ struct CatalogBookDetailView: View {
                 }
             }
 
-            Text("Ratings are from the bundled demo catalog, not live reviews.")
+            Text(book.isCustom ? "This book's details and rating were added on this iPhone." : "Ratings are from the bundled demo catalog, not live reviews.")
                 .font(.caption)
                 .foregroundStyle(LibraryTheme.textMuted)
         }
@@ -210,7 +210,7 @@ struct CatalogBookDetailView: View {
                 }
                 .buttonStyle(.plain)
             }
-            Text("Suggestions use the books’ themes, descriptions and demo catalog ratings.")
+            Text("Suggestions use the books’ themes, descriptions and catalog ratings.")
                 .font(.caption)
                 .foregroundStyle(LibraryTheme.textMuted)
         }
